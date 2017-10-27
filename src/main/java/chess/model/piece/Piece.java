@@ -20,7 +20,7 @@ public abstract class Piece {
 	}
 
 	public enum Color {
-		BLACK, WHITE;
+		BLACK, WHITE, NONE;
 		String s;
 	}
 

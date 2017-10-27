@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import chess.model.piece.Bishop;
+import chess.model.piece.Blank;
 import chess.model.piece.King;
 import chess.model.piece.Knight;
 import chess.model.piece.Pawn;
@@ -71,5 +72,11 @@ public class PieceTest {
 	public void 흰색_룩_생성() {
 		Piece piece = new Rook(position, Color.WHITE);
 		assertEquals('R', piece.getRepresent());
+	}
+
+	@Test
+	public void 빈칸_생성() {
+		Piece piece = new Blank(position);
+		assertEquals(' ', piece.getRepresent());
 	}
 }
