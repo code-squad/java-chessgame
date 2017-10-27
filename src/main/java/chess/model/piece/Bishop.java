@@ -1,10 +1,9 @@
 package chess.model.piece;
 
-public class Bishop extends Piece{
+public class Bishop extends Piece {
 
 	public Bishop(Position pos, Color color) {
-		super(pos, color);
-		// TODO Auto-generated constructor stub
+		super(pos, color, 'b');
 	}
 
 }
