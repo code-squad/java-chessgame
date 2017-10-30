@@ -5,6 +5,7 @@ import java.util.List;
 
 import chess.model.piece.Bishop;
 import chess.model.piece.Blank;
+import chess.model.piece.Direction;
 import chess.model.piece.King;
 import chess.model.piece.Knight;
 import chess.model.piece.Pawn;
@@ -22,38 +23,43 @@ public class Rank {
 	}
 
 	public static Rank createBlackPieces() {
-		return createPieces(0, Color.BLACK);
+		Rank rank = new Rank();
+		rank.pieceAdd(Rook.createBlack(new Position(0, 0)));
+		rank.pieceAdd(Knight.createBlack(new Position(1, 0)));
+		rank.pieceAdd(Bishop.createBlack(new Position(2, 0)));
+		rank.pieceAdd(Queen.createBlack(new Position(3, 0)));
+		rank.pieceAdd(King.createBlack(new Position(4, 0)));
+		rank.pieceAdd(Bishop.createBlack(new Position(5, 0)));
+		rank.pieceAdd(Knight.createBlack(new Position(6, 0)));
+		rank.pieceAdd(Rook.createBlack(new Position(7, 0)));
+		return rank;
 	}
 
 	public static Rank createWhitePieces() {
-		return createPieces(7, Color.WHITE);
-	}
-
-	private static Rank createPieces(int yPos, Color color) {
 		Rank rank = new Rank();
-		rank.pieceAdd(new Knight(new Position(0, yPos), color));
-		rank.pieceAdd(new Rook(new Position(1, yPos), color));
-		rank.pieceAdd(new Bishop(new Position(2, yPos), color));
-		rank.pieceAdd(new Queen(new Position(3, yPos), color));
-		rank.pieceAdd(new King(new Position(4, yPos), color));
-		rank.pieceAdd(new Rook(new Position(5, yPos), color));
-		rank.pieceAdd(new Bishop(new Position(6, yPos), color));
-		rank.pieceAdd(new Knight(new Position(7, yPos), color));
+		rank.pieceAdd(Rook.createWhite(new Position(0, 7)));
+		rank.pieceAdd(Knight.createWhite(new Position(1, 7)));
+		rank.pieceAdd(Bishop.createWhite(new Position(2, 7)));
+		rank.pieceAdd(Queen.createWhite(new Position(3, 7)));
+		rank.pieceAdd(King.createWhite(new Position(4, 7)));
+		rank.pieceAdd(Bishop.createWhite(new Position(5, 7)));
+		rank.pieceAdd(Knight.createWhite(new Position(6, 7)));
+		rank.pieceAdd(Rook.createWhite(new Position(7, 7)));
 		return rank;
 	}
 
 	public static Rank createBlackPawns() {
-		return createPawns(1, Color.BLACK);
+		Rank rank = new Rank();
+		for(int i =0; i < 8; i++) {
+			rank.pieceAdd(Pawn.createBlack(new Position(i, 1)));
+		}
+		return rank;
 	}
 
 	public static Rank createWhitePawns() {
-		return createPawns(6, Color.WHITE);
-	}
-
-	private static Rank createPawns(int yPos, Color color) {
 		Rank rank = new Rank();
-		for (int i = 0; i < 8; i++) {
-			rank.pieceAdd(new Pawn(new Position(i, yPos), color));
+		for(int i =0; i < 8; i++) {
+			rank.pieceAdd(Pawn.createWhite(new Position(i, 6)));
 		}
 		return rank;
 	}
@@ -61,7 +67,7 @@ public class Rank {
 	public static Rank createBlank(int yPos) {
 		Rank rank = new Rank();
 		for (int i = 0; i < 8; i++) {
-			rank.pieceAdd(new Blank(new Position(i, yPos)));
+			rank.pieceAdd(Blank.create(new Position(i, yPos)));
 		}
 		return rank;
 	}
@@ -82,8 +88,22 @@ public class Rank {
 		return pieces.get(xIndex);
 	}
 
-	public void move(Piece piece) {
-		pieces.set(piece.getXIndex(), piece);
+	public boolean move(Piece piece) {
+		int xIndex = piece.getXIndex();
+		Piece targetPiece = pieces.get(xIndex);
+		if (targetPiece.sameColor(piece.getColor())) {
+			return false;
+		}
+		pieces.set(xIndex, piece);
+		return true;
+	}
+
+	public double calScore(Color color) {
+		double score = 0;
+		for (Piece piece : pieces) {
+			score += piece.getScore(color);
+		}
+		return score;
 	}
 
 }

@@ -5,7 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import chess.model.piece.Bishop;
 import chess.model.piece.Blank;
+import chess.model.piece.Direction;
 import chess.model.piece.Knight;
 import chess.model.piece.Pawn;
 import chess.model.piece.Piece.Color;
@@ -26,24 +28,34 @@ public class BoardTest {
 	public void show() {
 		board.init();
 		System.out.println(board.show());
-		assertEquals("NRBQKRBN\nPPPPPPPP\n        \n        \n        \n        \npppppppp\nnrbqkrbn\n", board.show());
+		assertEquals("RNBQKBNR\nPPPPPPPP\n........\n........\n........\n........\npppppppp\nrnbqkbnr\n", board.show());
 	}
 
 	@Test
 	public void findPiece() {
 		board.init();
-		assertEquals(new Pawn(new Position("a7"), Color.WHITE), board.findPiece("a7"));
-		assertEquals(new Rook(new Position("f1"), Color.BLACK), board.findPiece("f1"));
-		assertEquals(new Knight(new Position("h8"), Color.WHITE), board.findPiece("h8"));
-		assertEquals(new Pawn(new Position("c2"), Color.BLACK), board.findPiece("c2"));
-		assertEquals(new Blank(new Position("c5")), board.findPiece("c5"));
+		assertEquals(Pawn.createWhite(new Position("a7")), board.findPiece("a7"));
+		assertEquals(Bishop.createBlack(new Position("f1")), board.findPiece("f1"));
+		assertEquals(Rook.createWhite(new Position("h8")), board.findPiece("h8"));
+		assertEquals(Pawn.createBlack(new Position("c2")), board.findPiece("c2"));
+		assertEquals(Blank.create(new Position("c5")), board.findPiece("c5"));
 	}
 
 	@Test
 	public void movePiece() {
 		board.init();
-		board.move("b2", "b4");
-		assertEquals(new Blank(new Position("b2")), board.findPiece("b2"));
-		assertEquals(new Pawn(new Position("b4"), Color.BLACK), board.findPiece("b4"));
+		boolean check = board.move("b2", "a2");
+		assertFalse(check);
+		check = board.move("b2", "b3");
+		assertTrue(check);
+		assertEquals(Blank.create(new Position("b2")), board.findPiece("b2"));
+		assertEquals(Pawn.createBlack(new Position("b3")), board.findPiece("b3"));
+	}
+	
+	@Test
+	public void calScore() {
+		board.init();
+		assertEquals(38, board.calScore(Color.BLACK),0.1);
+		assertEquals(38, board.calScore(Color.WHITE), 0.1);
 	}
 }

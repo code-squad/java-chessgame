@@ -9,7 +9,7 @@ public class RankTest {
 	@Test
 	public void 검은색_말들() {
 		Rank rank = Rank.createBlackPieces();
-		assertEquals("nrbqkrbn", rank.getRepresents());
+		assertEquals("rnbqkbnr", rank.getRepresents());
 	}
 
 	@Test
@@ -27,13 +27,13 @@ public class RankTest {
 	@Test
 	public void 흰색_말들() {
 		Rank rank = Rank.createWhitePieces();
-		assertEquals("NRBQKRBN", rank.getRepresents());
+		assertEquals("RNBQKBNR", rank.getRepresents());
 	}
 
 	@Test
 	public void 빈칸들() {
 		Rank rank = Rank.createBlank(5);
-		assertEquals("        ", rank.getRepresents());
+		assertEquals("........", rank.getRepresents());
 	}
 
 }

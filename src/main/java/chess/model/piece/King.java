@@ -2,8 +2,16 @@ package chess.model.piece;
 
 public class King extends Piece{
 
-	public King(Position pos, Color color) {
-		super(pos, color,'k');
+	private King(Position pos, Color color) {
+		super(pos, color,'k', Direction.royaltyDirections());
+	}
+	
+	public static King createBlack(Position pos) {
+		return new King(pos, Color.BLACK);
+	}
+	
+	public static King createWhite(Position pos) {
+		return new King(pos, Color.WHITE);
 	}
 
 }

@@ -1,19 +1,33 @@
 package chess.model.piece;
 
+import java.util.List;
+
 public abstract class Piece {
 	public enum Color {
 		BLACK, WHITE, NONE;
 		String s;
 	}
-	
+
 	protected Position position;
 	protected Color color;
 	protected char represent;
+	protected double score;
+	protected List<Direction> directions;
 
-	public Piece(Position pos, Color color, char represent) {
+	public Piece(Position pos, Color color, char represent, List<Direction> directions) {
 		this.position = pos;
 		this.color = color;
 		this.represent = represent;
+		this.score = 0;
+		this.directions = directions;
+	}
+
+	public Piece(Position pos, Color color, char represent, double score, List<Direction> directions) {
+		this.position = pos;
+		this.color = color;
+		this.represent = represent;
+		this.score = score;
+		this.directions = directions;
 	}
 
 	public boolean isBlack() {
@@ -22,6 +36,13 @@ public abstract class Piece {
 
 	public boolean isWhite() {
 		return color.equals(Color.WHITE);
+	}
+
+	public double getScore(Color color) {
+		if (this.color == color) {
+			return score;
+		}
+		return 0;
 	}
 
 	public int getX() {
@@ -87,4 +108,22 @@ public abstract class Piece {
 		this.position = position;
 	}
 
+	public boolean checkMove(Position targetPos) {
+		int xDegree = targetPos.getX() - position.getX();
+		int yDegree = targetPos.getY() - position.getY();
+		for (Direction direction : directions) {
+			if (direction.getxDegree() == xDegree && direction.getyDegree() == yDegree) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public boolean sameColor(Color color) {
+		return this.color.equals(color);
+	}
 }
