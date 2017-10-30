@@ -78,4 +78,12 @@ public class Rank {
 		return sb.toString();
 	}
 
+	public Piece findPiece(int xIndex) {
+		return pieces.get(xIndex);
+	}
+
+	public void move(Piece piece) {
+		pieces.set(piece.getXIndex(), piece);
+	}
+
 }
