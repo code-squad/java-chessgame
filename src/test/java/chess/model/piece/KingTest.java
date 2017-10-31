@@ -35,6 +35,15 @@ public class KingTest {
 		board.move("d4", "d5");
 	}
 
+	@Test
+	public void 다른_색의_말이_있는_곳으로_이동() {
+		Board board = new Board();
+		board.initBlank();
+		board.addPiece(King.createBlack(new Position("d4")));
+		board.addPiece(Pawn.createWhite(new Position("d5")));
+		board.move("d4", "d5");
+	}
+
 	@Test(expected = InvalidPositionException.class)
 	public void 같은_색의_말이_있는_곳으로_이동() {
 		Board board = new Board();
