@@ -26,9 +26,26 @@ public class Board {
 		ranks.add(Rank.createWhitePieces());
 	}
 
+	public void initBlank() {
+		ranks = new ArrayList<>();
+		ranks.add(Rank.createBlank(0));
+		ranks.add(Rank.createBlank(1));
+		ranks.add(Rank.createBlank(2));
+		ranks.add(Rank.createBlank(3));
+		ranks.add(Rank.createBlank(4));
+		ranks.add(Rank.createBlank(5));
+		ranks.add(Rank.createBlank(6));
+		ranks.add(Rank.createBlank(7));
+	}
+
+	public void addPiece(Piece piece) {
+		Rank rank = ranks.get(piece.getYIndex());
+		rank.move(piece);
+	}
+
 	public String show() {
 		StringBuilder sb = new StringBuilder();
-		for(int i = ranks.size() - 1; i >= 0; i--) {
+		for (int i = ranks.size() - 1; i >= 0; i--) {
 			Rank rank = ranks.get(i);
 			sb.append(rank.getRepresents()).append("\n");
 		}
@@ -41,7 +58,7 @@ public class Board {
 		return rank.findPiece(position.getXIndex());
 	}
 
-	public boolean move(String source, String target) {
+	public void move(String source, String target) {
 		Piece sourcePiece = findPiece(source);
 		Position sourcePos = new Position(source);
 		Position targetPos = new Position(target);
@@ -50,21 +67,14 @@ public class Board {
 		Rank sourceRank = ranks.get(sourcePiece.getYIndex());
 		Rank targetRank = ranks.get(targetPos.getYIndex());
 
-		if(!sourcePiece.checkMove(targetPos)) {
-			return false;
-		}
 		sourcePiece.move(targetPos);
-		if(!targetRank.move(sourcePiece)) {
-			return false;
-		}
+		targetRank.move(sourcePiece);
 		sourceRank.move(blank);
-		
-		return true;
 	}
 
 	public double calScore(Color color) {
 		double score = 0;
-		for(Rank rank : ranks) {
+		for (Rank rank : ranks) {
 			score += rank.calScore(color);
 		}
 		return score;

@@ -7,11 +7,19 @@ public class Position {
 	public Position(String position) {
 		this.x = position.charAt(0) - 'a' + 1;
 		this.y = Character.getNumericValue(position.charAt(1));
+		isInable(this.x, this.y);
 	}
 
 	public Position(int x, int y) {
 		this.x = x + 1;
 		this.y = y + 1;
+		isInable(this.x, this.y);
+	}
+
+	private void isInable(int x, int y) {
+		if (x < 1 || x > 8 || y < 1 || y > 8) {
+			throw new InvalidPositionException("체스판의 허용 위치가 아닙니다.( a~h, 1~8");
+		}
 	}
 
 	public int getX() {

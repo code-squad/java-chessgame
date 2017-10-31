@@ -6,6 +6,7 @@ import java.util.List;
 import chess.model.piece.Bishop;
 import chess.model.piece.Blank;
 import chess.model.piece.Direction;
+import chess.model.piece.InvalidPositionException;
 import chess.model.piece.King;
 import chess.model.piece.Knight;
 import chess.model.piece.Pawn;
@@ -50,7 +51,7 @@ public class Rank {
 
 	public static Rank createBlackPawns() {
 		Rank rank = new Rank();
-		for(int i =0; i < 8; i++) {
+		for (int i = 0; i < 8; i++) {
 			rank.pieceAdd(Pawn.createBlack(new Position(i, 1)));
 		}
 		return rank;
@@ -58,7 +59,7 @@ public class Rank {
 
 	public static Rank createWhitePawns() {
 		Rank rank = new Rank();
-		for(int i =0; i < 8; i++) {
+		for (int i = 0; i < 8; i++) {
 			rank.pieceAdd(Pawn.createWhite(new Position(i, 6)));
 		}
 		return rank;
@@ -88,14 +89,13 @@ public class Rank {
 		return pieces.get(xIndex);
 	}
 
-	public boolean move(Piece piece) {
+	public void move(Piece piece) {
 		int xIndex = piece.getXIndex();
 		Piece targetPiece = pieces.get(xIndex);
 		if (targetPiece.sameColor(piece.getColor())) {
-			return false;
+			throw new InvalidPositionException("같은 말이 있어서 이동 안됩니다.");
 		}
 		pieces.set(xIndex, piece);
-		return true;
 	}
 
 	public double calScore(Color color) {

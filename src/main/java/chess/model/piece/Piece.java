@@ -104,11 +104,14 @@ public abstract class Piece {
 		return true;
 	}
 
-	public void move(Position position) {
-		this.position = position;
+	public void move(Position target) {
+		if(!canMove(target)) {
+			throw new InvalidPositionException("이동 할 수 없는 위치 입니다.");
+		}
+		this.position = target;
 	}
 
-	public boolean checkMove(Position targetPos) {
+	private boolean canMove(Position targetPos) {
 		int xDegree = targetPos.getX() - position.getX();
 		int yDegree = targetPos.getY() - position.getY();
 		for (Direction direction : directions) {
@@ -126,4 +129,5 @@ public abstract class Piece {
 	public boolean sameColor(Color color) {
 		return this.color.equals(color);
 	}
+	
 }
