@@ -12,9 +12,6 @@ import chess.model.piece.Position;
 public class Board {
 	private List<Rank> ranks;
 
-	public Board() {
-	}
-
 	public void init() {
 		ranks = new ArrayList<>();
 		ranks.add(Rank.createBlackPieces());

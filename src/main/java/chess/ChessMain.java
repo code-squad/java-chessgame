@@ -13,10 +13,10 @@ public class ChessMain {
 		while(true) {
 			System.out.println("이동할 위치를 입력해 주세요.(move a1 b2, 종료: end)");
 			String input = scanner.nextLine();
-			if(input.equals("end")) {
+			if("end".equals(input)) {
 				break;
 			}
-			if(input.startsWith("move")) {
+			if("move".startsWith(input)) {
 				String[] positions = input.split(" ");
 				board.move(positions[1], positions[2]);
 				System.out.println(board.status());

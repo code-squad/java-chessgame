@@ -127,9 +127,7 @@ public abstract class Piece {
 		if (position == null) {
 			if (other.position != null)
 				return false;
-		} else if (!position.equals(other.position))
-			return false;
-		if (represent != other.represent)
+		} else if (!position.equals(other.position) || represent != other.represent)
 			return false;
 		return true;
 	}

@@ -68,9 +68,7 @@ public class Position {
 		if (getClass() != obj.getClass())
 			return false;
 		Position other = (Position) obj;
-		if (x != other.x)
-			return false;
-		if (y != other.y)
+		if (x != other.x || y != other.y)
 			return false;
 		return true;
 	}
