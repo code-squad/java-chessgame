@@ -1,11 +1,11 @@
 package chess.model.piece;
 
-import chess.model.piece.move.UnlimitedMoveStractegy;
+import chess.model.piece.move.UnlimitedMoveStrategy;
 
 public class Rook extends Piece {
 
 	private Rook(Position pos, Color color) {
-		super(pos, color, 'r', 5, Direction.rookDirections(), new UnlimitedMoveStractegy());
+		super(pos, color, 'r', 5, Direction.rookDirections(), new UnlimitedMoveStrategy());
 	}
 
 	public static Rook createBlack(Position pos) {

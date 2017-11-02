@@ -68,7 +68,9 @@ public enum Direction {
 		return Arrays.asList(NONE);
 	}
 
-	public static Direction direciton(int xDgree, int yDgree) {
+	public static Direction direciton(Position source,Position target) {
+		int xDgree = target.getX() - source.getX();
+		int yDgree = target.getY() - source.getY();
 		if (xDgree == 0) {
 			return northOrSouth(yDgree);
 		}
@@ -101,6 +103,10 @@ public enum Direction {
 
 	private static Direction northOrSouth(int yDgree) {
 		return yDgree > 0 ? NORTH : SOUTH;
+	}
+
+	public boolean equals(int xDegree, int yDegree) {
+		return this.xDegree == xDegree && this.yDegree == yDegree;
 	}
 
 }

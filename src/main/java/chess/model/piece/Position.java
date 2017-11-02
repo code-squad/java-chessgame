@@ -1,5 +1,8 @@
 package chess.model.piece;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Position {
 	private int x;
 	private int y;
@@ -38,8 +41,32 @@ public class Position {
 		return y - 1;
 	}
 
-	public Position ahead(Direction direction) {
+	private Position ahead(Direction direction) {
 		return new Position(x + direction.getxDegree() - 1, y + direction.getyDegree() - 1);
+	}
+
+	public boolean isValidMove(Position source, List<Direction> directions) {
+		int xDegree = this.getX() - source.getX();
+		int yDegree = this.getY() - source.getY();
+		for (Direction direction : directions) {
+			if (direction.equals(xDegree, yDegree)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public List<Position> aheadPositions(Direction direction, Position target) {
+		List<Position> aheadPositions = new ArrayList<>();
+		Position position = new Position(x - 1, y - 1);
+		for (int i = 0; i < 7; i++) {
+			position = position.ahead(direction);
+			if (position.equals(target)) {
+				return aheadPositions;
+			}
+			aheadPositions.add(position);
+		}
+		return aheadPositions;
 	}
 
 	public int yGap(int y) {

@@ -2,12 +2,12 @@ package chess.model.piece;
 
 import java.util.List;
 
-import chess.model.piece.move.NormalMoveStractegy;
+import chess.model.piece.move.NormalMoveStrategy;
 
 public class Pawn extends Piece {
 
 	private Pawn(Position pos, Color color, List<Direction> directions) {
-		super(pos, color, 'p', 1, directions, new NormalMoveStractegy());
+		super(pos, color, 'p', 1, directions, new NormalMoveStrategy());
 	}
 	
 	public static Pawn createBlack(Position pos) {

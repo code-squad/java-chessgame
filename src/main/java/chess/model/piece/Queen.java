@@ -1,11 +1,11 @@
 package chess.model.piece;
 
-import chess.model.piece.move.UnlimitedMoveStractegy;
+import chess.model.piece.move.UnlimitedMoveStrategy;
 
 public class Queen extends Piece {
 
 	private Queen(Position pos, Color color) {
-		super(pos, color, 'q', 9, Direction.royaltyDirections(), new UnlimitedMoveStractegy());
+		super(pos, color, 'q', 9, Direction.royaltyDirections(), new UnlimitedMoveStrategy());
 	}
 
 	public static Queen createBlack(Position pos) {

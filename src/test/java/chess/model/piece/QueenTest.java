@@ -34,7 +34,7 @@ public class QueenTest {
 		board.addPiece(Queen.createBlack(new Position("d4")));
 		board.move("d4", "a7");
 	}
-
+	
 	@Test
 	public void 다른_색의_말이_있는_곳으로_이동() {
 		Board board = new Board();

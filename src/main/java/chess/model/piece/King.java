@@ -1,11 +1,11 @@
 package chess.model.piece;
 
-import chess.model.piece.move.NormalMoveStractegy;
+import chess.model.piece.move.NormalMoveStrategy;
 
 public class King extends Piece{
 
 	private King(Position pos, Color color) {
-		super(pos, color,'k', Direction.royaltyDirections(), new NormalMoveStractegy());
+		super(pos, color,'k', Direction.royaltyDirections(), new NormalMoveStrategy());
 	}
 	
 	public static King createBlack(Position pos) {

@@ -3,7 +3,6 @@ package chess.model.board;
 import java.util.ArrayList;
 import java.util.List;
 
-import chess.model.piece.Blank;
 import chess.model.piece.InvalidPositionException;
 import chess.model.piece.Piece;
 import chess.model.piece.Piece.Color;
@@ -59,6 +58,11 @@ public class Board {
 		Position targetPosition = new Position(target);
 		List<Position> routes = sourcePiece.pathWay(targetPosition);
 
+		if(routes.isEmpty()) {
+			move(sourcePiece, targetPosition);
+			return;
+		}
+		
 		for (Position route : routes) {
 			isBlank(route);
 		}

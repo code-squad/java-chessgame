@@ -1,11 +1,11 @@
 package chess.model.piece;
 
-import chess.model.piece.move.NormalMoveStractegy;
+import chess.model.piece.move.NormalMoveStrategy;
 
 public class Knight extends Piece{
 
 	private Knight(Position pos, Color color) {
-		super(pos, color,'n', 2.5, Direction.knightDirections(), new NormalMoveStractegy());
+		super(pos, color,'n', 2.5, Direction.knightDirections(), new NormalMoveStrategy());
 	}
 	
 	public static Knight createBlack(Position pos) {
