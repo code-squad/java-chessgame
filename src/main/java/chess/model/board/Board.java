@@ -26,58 +26,55 @@ public class Board {
 
 	public void initBlank() {
 		ranks = new ArrayList<>();
-		ranks.add(Rank.createBlank(0));
-		ranks.add(Rank.createBlank(1));
-		ranks.add(Rank.createBlank(2));
-		ranks.add(Rank.createBlank(3));
-		ranks.add(Rank.createBlank(4));
-		ranks.add(Rank.createBlank(5));
-		ranks.add(Rank.createBlank(6));
-		ranks.add(Rank.createBlank(7));
+		for (int i = 0; i < 8; i++) {
+			ranks.add(Rank.createBlank(i));
+		}
 	}
 
 	public void addPiece(Piece piece) {
-		Rank rank = ranks.get(piece.getYIndex());
+		Rank rank = findRank(piece.getYIndex());
 		rank.move(piece);
 	}
 
 	public String status() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = ranks.size() - 1; i >= 0; i--) {
-			Rank rank = ranks.get(i);
+			Rank rank = findRank(i);
 			sb.append(rank.getRepresents()).append("\n");
 		}
 		return sb.toString();
 	}
 
 	public Piece findPiece(String pos) {
-		Position position = new Position(pos);
-		return findPiece(position);
+		return findPiece(new Position(pos));
 	}
 
 	private Piece findPiece(Position position) {
-		Rank rank = ranks.get(position.getYIndex());
+		Rank rank = findRank(position.getYIndex());
 		return rank.findPiece(position.getXIndex());
 	}
 
 	public void move(String source, String target) {
 		Piece sourcePiece = findPiece(source);
 		Position targetPosition = new Position(target);
-		List<Position> positions = sourcePiece.pathWay(targetPosition);
+		List<Position> routes = sourcePiece.pathWay(targetPosition);
 
-		for (Position position : positions) {
-			isBlank(position);
+		for (Position route : routes) {
+			isBlank(route);
 		}
 		move(sourcePiece, targetPosition);
 	}
 
 	private void move(Piece sourcePiece, Position targetPosition) {
-		Rank sourceRank = ranks.get(sourcePiece.getYIndex());
-		Rank targetRank = ranks.get(targetPosition.getYIndex());
-		Piece blank = Blank.create(sourcePiece.getPosition());
+		Rank sourceRank = findRank(sourcePiece.getYIndex());
+		Rank targetRank = findRank(targetPosition.getYIndex());
+		sourceRank.leave(sourcePiece.getPosition());
 		sourcePiece.move(targetPosition);
 		targetRank.move(sourcePiece);
-		sourceRank.move(blank);
+	}
+	
+	private Rank findRank(int yIndex) {
+		return ranks.get(yIndex);
 	}
 
 	private void isBlank(Position position) {

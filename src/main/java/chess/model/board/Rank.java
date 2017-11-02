@@ -105,4 +105,8 @@ public class Rank {
 		return score;
 	}
 
+	public void leave(Position position) {
+		move(Blank.create(position));
+	}
+
 }

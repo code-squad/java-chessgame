@@ -17,13 +17,8 @@ public abstract class Piece {
 	protected List<Direction> directions;
 	protected MoveStrategy move;
 
-	public Piece(Position pos, Color color, char represent, List<Direction> directions, MoveStrategy move) {
-		this.position = pos;
-		this.color = color;
-		this.represent = represent;
-		this.score = 0;
-		this.directions = directions;
-		this.move = move;
+	public Piece(Position position, Color color, char represent, List<Direction> directions, MoveStrategy move) {
+		this(position, color, represent, 0, directions, move);
 	}
 
 	public Piece(Position position, Color color, char represent, double score, List<Direction> directions,
