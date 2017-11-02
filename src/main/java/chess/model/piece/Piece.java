@@ -26,9 +26,9 @@ public abstract class Piece {
 		this.move = move;
 	}
 
-	public Piece(Position pos, Color color, char represent, double score, List<Direction> directions,
+	public Piece(Position position, Color color, char represent, double score, List<Direction> directions,
 			MoveStrategy move) {
-		this.position = pos;
+		this.position = position;
 		this.color = color;
 		this.represent = represent;
 		this.score = score;

@@ -20,7 +20,7 @@ public class NormalMoveStractegy implements MoveStrategy {
 
 	@Override
 	public List<Position> pathWay(Position source, Position target, List<Direction> directions) {
-		if (isValid(target.getXIndex() - source.getXIndex(), target.getYIndex() - source.getYIndex(), directions)) {
+		if (isValid(target.xGap(source.getX()), target.yGap(source.getY()), directions)) {
 			return new ArrayList<Position>();
 		}
 		throw new InvalidPositionException("이동 할 수 없는 위치 입니다.");

@@ -12,14 +12,14 @@ public class UnlimitedMoveStractegy implements MoveStrategy {
 	@Override
 	public List<Position> pathWay(Position source, Position target, List<Direction> directions) {
 		List<Position> positions = new ArrayList<Position>();
-		Direction direction = Direction.direciton(target.getXIndex() - source.getXIndex(), target.getYIndex() - source.getYIndex());
+		Direction direction = Direction.direciton(target.xGap(source.getX()), target.yGap(source.getY()));
 		if(!directions.contains(direction)) {
 			throw new InvalidPositionException("이동 할 수 없는 방향 입니다.");
 		}
-		Position ahead = source.move(direction);
+		Position ahead = source.ahead(direction);
 		for(int i =0; i < 7; i++) {
 			positions.add(ahead);
-			ahead = ahead.move(direction);
+			ahead = ahead.ahead(direction);
 			if(ahead.equals(target)) {
 				return positions;
 			}

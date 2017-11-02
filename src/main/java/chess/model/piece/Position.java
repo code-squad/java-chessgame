@@ -38,6 +38,18 @@ public class Position {
 		return y - 1;
 	}
 
+	public Position ahead(Direction direction) {
+		return new Position(x + direction.getxDegree() - 1, y + direction.getyDegree() - 1);
+	}
+
+	public int yGap(int y) {
+		return this.y - y;
+	}
+
+	public int xGap(int x) {
+		return this.x - x;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -66,10 +78,6 @@ public class Position {
 	@Override
 	public String toString() {
 		return "Position [x=" + x + ", y=" + y + "]";
-	}
-
-	public Position move(Direction direction) {
-		return new Position(x + direction.getxDegree() - 1, y + direction.getyDegree() - 1);
 	}
 
 }
