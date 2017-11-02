@@ -1,11 +1,11 @@
 package chess.model.piece;
 
-import chess.model.piece.move.NormalMoveStractegy;
+import chess.model.piece.move.BlankMoveStractegy;
 
 public class Blank extends Piece {
 
 	private Blank(Position pos) {
-		super(pos, Color.NONE, '.', Direction.blankDirections(), new NormalMoveStractegy());
+		super(pos, Color.NONE, '.', Direction.blankDirections(), new BlankMoveStractegy());
 	}
 	
 	public static Blank create(Position pos) {
