@@ -68,9 +68,9 @@ public class Position {
 		if (getClass() != obj.getClass())
 			return false;
 		Position other = (Position) obj;
-		if (x != other.x || y != other.y)
+		if (x != other.x)
 			return false;
-		return true;
+		return y == other.y;
 	}
 
 	@Override
