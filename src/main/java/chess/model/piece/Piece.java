@@ -51,6 +51,10 @@ public abstract class Piece {
 		return 0;
 	}
 
+	public Position getPosition() {
+		return position;
+	}
+
 	public int getX() {
 		return position.getX();
 	}
@@ -72,6 +76,26 @@ public abstract class Piece {
 
 	public int getYIndex() {
 		return position.getYIndex();
+	}
+
+	public void move(Position target) {
+		this.position = target;
+	}
+
+	public Color getColor() {
+		return color;
+	}
+
+	public boolean sameColor(Color color) {
+		return this.color.equals(color);
+	}
+
+	public boolean isBlank() {
+		return this instanceof Blank;
+	}
+
+	public List<Position> pathWay(Position targetPosition) {
+		return move.pathWay(position, targetPosition, directions);
 	}
 
 	@Override
@@ -108,29 +132,6 @@ public abstract class Piece {
 		if (represent != other.represent)
 			return false;
 		return true;
-	}
-
-	public void move(Position target) {
-//		if (!move.isValid(target.getX() - position.getX(), target.getY() - position.getY(), directions)) {
-//			throw new InvalidPositionException("이동 할 수 없는 위치 입니다.");
-//		}
-		this.position = target;
-	}
-
-	public Color getColor() {
-		return color;
-	}
-
-	public boolean sameColor(Color color) {
-		return this.color.equals(color);
-	}
-
-	public boolean isBlank() {
-		return this instanceof Blank;
-	}
-
-	public List<Position> pathWay(Position targetPosition) {
-		return move.pathWay(position, targetPosition, directions);
 	}
 
 }

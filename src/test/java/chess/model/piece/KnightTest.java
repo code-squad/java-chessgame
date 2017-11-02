@@ -28,6 +28,14 @@ public class KnightTest {
 	}
 
 	@Test
+	public void 이동() {
+		Board board = new Board();
+		board.initBlank();
+		board.addPiece(Knight.createBlack(new Position("d4")));
+		board.move("d4", "c6");
+	}
+
+	@Test
 	public void 다른_색의_말이_있는_곳으로_이동() {
 		Board board = new Board();
 		board.initBlank();

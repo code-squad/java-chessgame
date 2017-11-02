@@ -28,14 +28,14 @@ public class BoardTest {
 	@Test
 	public void 체스판_생성() {
 		board.init();
-		System.out.println(board.show());
-		assertEquals("RNBQKBNR\nPPPPPPPP\n........\n........\n........\n........\npppppppp\nrnbqkbnr\n", board.show());
+		System.out.println(board.status());
+		assertEquals("RNBQKBNR\nPPPPPPPP\n........\n........\n........\n........\npppppppp\nrnbqkbnr\n", board.status());
 	}
 
 	@Test
 	public void 빈_체스판_생성() {
 		board.initBlank();
-		assertEquals("........\n........\n........\n........\n........\n........\n........\n........\n", board.show());
+		assertEquals("........\n........\n........\n........\n........\n........\n........\n........\n", board.status());
 	}
 
 	@Test

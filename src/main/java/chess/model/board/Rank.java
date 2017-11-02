@@ -5,7 +5,6 @@ import java.util.List;
 
 import chess.model.piece.Bishop;
 import chess.model.piece.Blank;
-import chess.model.piece.Direction;
 import chess.model.piece.InvalidPositionException;
 import chess.model.piece.King;
 import chess.model.piece.Knight;
@@ -93,7 +92,7 @@ public class Rank {
 		int xIndex = piece.getXIndex();
 		Piece targetPiece = pieces.get(xIndex);
 		if (targetPiece.sameColor(piece.getColor())) {
-			throw new InvalidPositionException("같은 말이 있어서 이동 안됩니다.");
+			throw new InvalidPositionException("같은 색의 말이 있어서 이동이 안됩니다.");
 		}
 		pieces.set(xIndex, piece);
 	}

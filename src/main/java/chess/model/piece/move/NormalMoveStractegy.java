@@ -9,8 +9,7 @@ import chess.model.piece.Position;
 
 public class NormalMoveStractegy implements MoveStrategy {
 
-	@Override
-	public boolean isValid(int xDegree, int yDegree, List<Direction> directions) {
+	private boolean isValid(int xDegree, int yDegree, List<Direction> directions) {
 		for (Direction direction : directions) {
 			if (direction.getxDegree() == xDegree && direction.getyDegree() == yDegree) {
 				return true;

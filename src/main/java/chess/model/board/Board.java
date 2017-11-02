@@ -44,7 +44,7 @@ public class Board {
 		rank.move(piece);
 	}
 
-	public String show() {
+	public String status() {
 		StringBuilder sb = new StringBuilder();
 		for (int i = ranks.size() - 1; i >= 0; i--) {
 			Rank rank = ranks.get(i);
@@ -65,35 +65,22 @@ public class Board {
 
 	public void move(String source, String target) {
 		Piece sourcePiece = findPiece(source);
-		Position sourcePosition = new Position(source);
 		Position targetPosition = new Position(target);
-		Piece blank = Blank.create(sourcePosition);
-
-		Rank sourceRank = ranks.get(sourcePiece.getYIndex());
-		Rank targetRank = ranks.get(targetPosition.getYIndex());
-
 		List<Position> positions = sourcePiece.pathWay(targetPosition);
 
-		if (positions.isEmpty()) {
-			sourcePiece.move(targetPosition);
-			targetRank.move(sourcePiece);
-			sourceRank.move(blank);
-			if (isSameColor(sourcePosition, targetPosition)) {
-				throw new InvalidPositionException("같은 색의 말이 위치하고 있습니다.");
-			}
-			return;
-		}
 		for (Position position : positions) {
 			isBlank(position);
 		}
+		move(sourcePiece, targetPosition);
+	}
+
+	private void move(Piece sourcePiece, Position targetPosition) {
+		Rank sourceRank = ranks.get(sourcePiece.getYIndex());
+		Rank targetRank = ranks.get(targetPosition.getYIndex());
+		Piece blank = Blank.create(sourcePiece.getPosition());
 		sourcePiece.move(targetPosition);
 		targetRank.move(sourcePiece);
 		sourceRank.move(blank);
-		if (isSameColor(sourcePosition, targetPosition)) {
-			throw new InvalidPositionException("같은 색의 말이 위치하고 있습니다.");
-		}
-		return;
-
 	}
 
 	private void isBlank(Position position) {
@@ -101,12 +88,6 @@ public class Board {
 		if (!piece.isBlank()) {
 			throw new InvalidPositionException("이동 상의 경로에 다른 말이 있습니다.");
 		}
-	}
-
-	private boolean isSameColor(Position sourcePosition, Position targetPosition) {
-		Piece source = findPiece(sourcePosition);
-		Piece target = findPiece(targetPosition);
-		return source.sameColor(target.getColor());
 	}
 
 	public double calScore(Color color) {
