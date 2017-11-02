@@ -16,11 +16,17 @@ public class BlankTest {
 	}
 
 	@Test
+	public void 빈칸인지_확인() {
+		Piece piece = Blank.create(position);
+		assertTrue(piece.isBlank());
+	}
+
+	@Test
 	public void 빈칸_생성() {
 		Piece piece = Blank.create(position);
 		assertEquals('.', piece.getRepresent());
 	}
-	
+
 	@Test(expected = InvalidPositionException.class)
 	public void 이동() {
 		Board board = new Board();

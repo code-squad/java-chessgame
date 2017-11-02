@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import chess.model.piece.Blank;
+import chess.model.piece.InvalidPositionException;
 import chess.model.piece.Piece;
 import chess.model.piece.Piece.Color;
 import chess.model.piece.Position;
@@ -54,22 +55,58 @@ public class Board {
 
 	public Piece findPiece(String pos) {
 		Position position = new Position(pos);
+		return findPiece(position);
+	}
+
+	private Piece findPiece(Position position) {
 		Rank rank = ranks.get(position.getYIndex());
 		return rank.findPiece(position.getXIndex());
 	}
 
 	public void move(String source, String target) {
 		Piece sourcePiece = findPiece(source);
-		Position sourcePos = new Position(source);
-		Position targetPos = new Position(target);
-		Piece blank = Blank.create(sourcePos);
+		Position sourcePosition = new Position(source);
+		Position targetPosition = new Position(target);
+		Piece blank = Blank.create(sourcePosition);
 
 		Rank sourceRank = ranks.get(sourcePiece.getYIndex());
-		Rank targetRank = ranks.get(targetPos.getYIndex());
+		Rank targetRank = ranks.get(targetPosition.getYIndex());
 
-		sourcePiece.move(targetPos);
+		List<Position> positions = sourcePiece.pathWay(targetPosition);
+
+		if (positions.isEmpty()) {
+			sourcePiece.move(targetPosition);
+			targetRank.move(sourcePiece);
+			sourceRank.move(blank);
+			if (isSameColor(sourcePosition, targetPosition)) {
+				throw new InvalidPositionException("같은 색의 말이 위치하고 있습니다.");
+			}
+			return;
+		}
+		for (Position position : positions) {
+			isBlank(position);
+		}
+		sourcePiece.move(targetPosition);
 		targetRank.move(sourcePiece);
 		sourceRank.move(blank);
+		if (isSameColor(sourcePosition, targetPosition)) {
+			throw new InvalidPositionException("같은 색의 말이 위치하고 있습니다.");
+		}
+		return;
+
+	}
+
+	private void isBlank(Position position) {
+		Piece piece = findPiece(position);
+		if (!piece.isBlank()) {
+			throw new InvalidPositionException("이동 상의 경로에 다른 말이 있습니다.");
+		}
+	}
+
+	private boolean isSameColor(Position sourcePosition, Position targetPosition) {
+		Piece source = findPiece(sourcePosition);
+		Piece target = findPiece(targetPosition);
+		return source.sameColor(target.getColor());
 	}
 
 	public double calScore(Color color) {

@@ -2,6 +2,8 @@ package chess.model.piece;
 
 import java.util.List;
 
+import chess.model.piece.move.MoveStrategy;
+
 public abstract class Piece {
 	public enum Color {
 		BLACK, WHITE, NONE;
@@ -13,21 +15,25 @@ public abstract class Piece {
 	protected char represent;
 	protected double score;
 	protected List<Direction> directions;
+	protected MoveStrategy move;
 
-	public Piece(Position pos, Color color, char represent, List<Direction> directions) {
+	public Piece(Position pos, Color color, char represent, List<Direction> directions, MoveStrategy move) {
 		this.position = pos;
 		this.color = color;
 		this.represent = represent;
 		this.score = 0;
 		this.directions = directions;
+		this.move = move;
 	}
 
-	public Piece(Position pos, Color color, char represent, double score, List<Direction> directions) {
+	public Piece(Position pos, Color color, char represent, double score, List<Direction> directions,
+			MoveStrategy move) {
 		this.position = pos;
 		this.color = color;
 		this.represent = represent;
 		this.score = score;
 		this.directions = directions;
+		this.move = move;
 	}
 
 	public boolean isBlack() {
@@ -105,21 +111,10 @@ public abstract class Piece {
 	}
 
 	public void move(Position target) {
-		if(!canMove(target)) {
-			throw new InvalidPositionException("이동 할 수 없는 위치 입니다.");
-		}
+//		if (!move.isValid(target.getX() - position.getX(), target.getY() - position.getY(), directions)) {
+//			throw new InvalidPositionException("이동 할 수 없는 위치 입니다.");
+//		}
 		this.position = target;
-	}
-
-	private boolean canMove(Position targetPos) {
-		int xDegree = targetPos.getX() - position.getX();
-		int yDegree = targetPos.getY() - position.getY();
-		for (Direction direction : directions) {
-			if (direction.getxDegree() == xDegree && direction.getyDegree() == yDegree) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public Color getColor() {
@@ -129,5 +124,13 @@ public abstract class Piece {
 	public boolean sameColor(Color color) {
 		return this.color.equals(color);
 	}
-	
+
+	public boolean isBlank() {
+		return this instanceof Blank;
+	}
+
+	public List<Position> pathWay(Position targetPosition) {
+		return move.pathWay(position, targetPosition, directions);
+	}
+
 }

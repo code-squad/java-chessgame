@@ -68,4 +68,8 @@ public class Position {
 		return "Position [x=" + x + ", y=" + y + "]";
 	}
 
+	public Position move(Direction direction) {
+		return new Position(x + direction.getxDegree() - 1, y + direction.getyDegree() - 1);
+	}
+
 }
