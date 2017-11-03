@@ -3,12 +3,13 @@ package chess;
 import java.util.Scanner;
 
 import chess.model.board.Board;
+import chess.model.board.NormalInitStrategy;
 
 public class ChessMain {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
 		Board board = new Board();
-		board.init();
+		board.init(new NormalInitStrategy());
 		System.out.println(board.status());
 		while(true) {
 			System.out.println("이동할 위치를 입력해 주세요.(move a1 b2, 종료: end)");

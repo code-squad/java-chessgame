@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import chess.model.board.BlankInitStrategy;
 import chess.model.board.Board;
 
 public class BlankTest {
@@ -30,7 +31,7 @@ public class BlankTest {
 	@Test(expected = InvalidPositionException.class)
 	public void 이동() {
 		Board board = new Board();
-		board.initBlank();
+		board.init(new BlankInitStrategy());
 		board.move("d4", "d5");
 	}
 }

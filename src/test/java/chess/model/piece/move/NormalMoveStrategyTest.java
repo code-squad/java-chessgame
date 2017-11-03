@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import chess.model.board.BlankInitStrategy;
 import chess.model.board.Board;
 import chess.model.piece.Direction;
 import chess.model.piece.InvalidPositionException;
@@ -31,7 +32,7 @@ public class NormalMoveStrategyTest {
 	@Test
 	public void 다른_색의_말이_있는_곳으로_이동() {
 		Board board = new Board();
-		board.initBlank();
+		board.init(new BlankInitStrategy());
 		board.addPiece(King.createBlack(new Position("d4")));
 		board.addPiece(Pawn.createWhite(new Position("d5")));
 		board.move("d4", "d5");
@@ -40,7 +41,7 @@ public class NormalMoveStrategyTest {
 	@Test(expected = InvalidPositionException.class)
 	public void 같은_색의_말이_있는_곳으로_이동() {
 		Board board = new Board();
-		board.initBlank();
+		board.init(new BlankInitStrategy());
 		board.addPiece(King.createBlack(new Position("d4")));
 		board.addPiece(Pawn.createBlack(new Position("d5")));
 		board.move("d4", "d5");

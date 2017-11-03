@@ -11,23 +11,8 @@ import chess.model.piece.Position;
 public class Board {
 	private List<Rank> ranks;
 
-	public void init() {
-		ranks = new ArrayList<>();
-		ranks.add(Rank.createBlackPieces());
-		ranks.add(Rank.createBlackPawns());
-		ranks.add(Rank.createBlank(2));
-		ranks.add(Rank.createBlank(3));
-		ranks.add(Rank.createBlank(4));
-		ranks.add(Rank.createBlank(5));
-		ranks.add(Rank.createWhitePawns());
-		ranks.add(Rank.createWhitePieces());
-	}
-
-	public void initBlank() {
-		ranks = new ArrayList<>();
-		for (int i = 0; i < 8; i++) {
-			ranks.add(Rank.createBlank(i));
-		}
+	public void init(InitStrategy init) {
+		ranks = init.setup();
 	}
 
 	public void addPiece(Piece piece) {
