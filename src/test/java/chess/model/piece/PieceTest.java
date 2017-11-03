@@ -5,17 +5,9 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import chess.model.piece.Bishop;
-import chess.model.piece.Blank;
-import chess.model.piece.Direction;
-import chess.model.piece.King;
-import chess.model.piece.Knight;
 import chess.model.piece.Pawn;
 import chess.model.piece.Piece;
-import chess.model.piece.Piece.Color;
 import chess.model.piece.Position;
-import chess.model.piece.Queen;
-import chess.model.piece.Rook;
 
 public class PieceTest {
 	Position position;

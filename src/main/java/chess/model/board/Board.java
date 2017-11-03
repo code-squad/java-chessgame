@@ -39,7 +39,7 @@ public class Board {
 		StringBuilder sb = new StringBuilder();
 		for (int i = ranks.size() - 1; i >= 0; i--) {
 			Rank rank = findRank(i);
-			sb.append(rank.getRepresents()).append("\n");
+			sb = rank.status(sb).append("\n");
 		}
 		return sb.toString();
 	}
@@ -58,11 +58,6 @@ public class Board {
 		Position targetPosition = new Position(target);
 		List<Position> routes = sourcePiece.pathWay(targetPosition);
 
-		if(routes.isEmpty()) {
-			move(sourcePiece, targetPosition);
-			return;
-		}
-		
 		for (Position route : routes) {
 			isBlank(route);
 		}

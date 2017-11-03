@@ -41,31 +41,25 @@ public class Position {
 		return y - 1;
 	}
 
-	private Position ahead(Direction direction) {
-		return new Position(x + direction.getxDegree() - 1, y + direction.getyDegree() - 1);
+	private Position ahead(Direction direction, Position target, List<Position> aheadPositions) {
+		Position position = new Position(x + direction.getXDegree() - 1, y + direction.getYDegree() - 1);
+		if(position.equals(target)) {
+			return this;
+		}
+		aheadPositions.add(position.ahead(direction, target, aheadPositions));
+		return this;
 	}
 
 	public boolean isValidMove(Position source, List<Direction> directions) {
 		int xDegree = this.getX() - source.getX();
 		int yDegree = this.getY() - source.getY();
-		for (Direction direction : directions) {
-			if (direction.equals(xDegree, yDegree)) {
-				return true;
-			}
-		}
-		return false;
+		return directions.stream().anyMatch((direction) -> { return direction.equals(xDegree, yDegree);});
 	}
-
+	
 	public List<Position> aheadPositions(Direction direction, Position target) {
 		List<Position> aheadPositions = new ArrayList<>();
-		Position position = new Position(x - 1, y - 1);
-		for (int i = 0; i < 7; i++) {
-			position = position.ahead(direction);
-			if (position.equals(target)) {
-				return aheadPositions;
-			}
-			aheadPositions.add(position);
-		}
+		ahead(direction, target, aheadPositions);
+		aheadPositions.remove(target);
 		return aheadPositions;
 	}
 

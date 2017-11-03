@@ -16,7 +16,7 @@ public class UnlimitedMoveStrategy implements MoveStrategy {
 		if (!directions.contains(direction)) {
 			throw new InvalidPositionException("이동 할 수 없는 방향 입니다.");
 		}
-		aheadPositions = source.aheadPositions(direction, target);
+		aheadPositions =  source.aheadPositions(direction, target);
 		return aheadPositions;
 	}
 

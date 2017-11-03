@@ -7,10 +7,7 @@ import org.junit.Test;
 
 import chess.model.piece.Bishop;
 import chess.model.piece.Blank;
-import chess.model.piece.Direction;
 import chess.model.piece.InvalidPositionException;
-import chess.model.piece.King;
-import chess.model.piece.Knight;
 import chess.model.piece.Pawn;
 import chess.model.piece.Piece.Color;
 import chess.model.piece.Position;

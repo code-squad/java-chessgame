@@ -27,16 +27,17 @@ public enum Direction {
 	private int xDegree;
 	private int yDegree;
 
+	
 	private Direction(int xDegree, int yDegree) {
 		this.xDegree = xDegree;
 		this.yDegree = yDegree;
 	}
-
-	public int getxDegree() {
+	
+	public int getXDegree() {
 		return xDegree;
 	}
 
-	public int getyDegree() {
+	public int getYDegree() {
 		return yDegree;
 	}
 

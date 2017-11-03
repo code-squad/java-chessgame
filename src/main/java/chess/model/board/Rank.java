@@ -75,15 +75,14 @@ public class Rank {
 	private void pieceAdd(Piece piece) {
 		pieces.add(piece);
 	}
-
-	public String getRepresents() {
-		StringBuilder sb = new StringBuilder();
+	
+	public StringBuilder status(StringBuilder sb) {
 		for (Piece piece : pieces) {
-			sb.append(piece.getRepresent());
+			sb = piece.status(sb);
 		}
-		return sb.toString();
+		return sb;
 	}
-
+	
 	public Piece findPiece(int xIndex) {
 		return pieces.get(xIndex);
 	}

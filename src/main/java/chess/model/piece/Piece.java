@@ -93,6 +93,11 @@ public abstract class Piece {
 		return move.pathWay(position, targetPosition, directions);
 	}
 
+	public StringBuilder status(StringBuilder sb) {
+		sb.append(getRepresent());
+		return sb;
+	}
+
 	@Override
 	public String toString() {
 		return "Piece [position=" + position + ", color=" + color + ", represent=" + represent + "]";
