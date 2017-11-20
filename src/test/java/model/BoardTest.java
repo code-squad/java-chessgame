@@ -9,7 +9,7 @@ public class BoardTest {
 	private Board board;
 
 	@Before
-	public void boardSetupTest() {
+	public void boardSetup() {
 		board = new Board();
 	}
 
@@ -17,10 +17,10 @@ public class BoardTest {
 	public void boardCreateTest() throws Exception {
 		board.initialize();
 
-		assertEquals(17, board.pieceCount());
+		assertEquals(16, board.pieceCount());
 
 		String blankRank = appendNewLine("........");
-		assertEquals(appendNewLine(".......p") + appendNewLine("pppppppp") + blankRank + blankRank + blankRank + blankRank
+		assertEquals(appendNewLine("........") + appendNewLine("pppppppp") + blankRank + blankRank + blankRank + blankRank
 				+ appendNewLine("pppppppp") + blankRank, board.showBoard());
 	}
 
