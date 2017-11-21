@@ -9,7 +9,7 @@ import exception.PickNullPieceException;
 
 public class BoardMoveTest {
 	private Board board;
-	String blankRank = appendNewLine("........");
+	private String blankRank = appendNewLine("........");
 
 	@Before
 	public void boardSetup() {

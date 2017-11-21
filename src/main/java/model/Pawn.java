@@ -1,8 +1,7 @@
 package model;
 
-public class Pawn implements Piece{
-	
-	String color;
+public class Pawn implements Piece{	
+	private String color;
 	
 	public Pawn(String color) {
 		this.color = color;
