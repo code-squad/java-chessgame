@@ -13,9 +13,9 @@ public class BoardRow {
 	}
 
 	public BoardRow(String line, String color) {
-		if (line.equals("front"))
+		if ("front".equals(line))
 			row = initializeFrontLine(color);
-		if (line.equals("back"))
+		if ("back".equals(line))
 			row = initializeBackLine(color);
 	}
 

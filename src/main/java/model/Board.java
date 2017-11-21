@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import exception.InvalidLocationException;
 import exception.InvalidMoveException;
-import exception.PickNullPieceException;;
+import exception.PickNullPieceException;
 
 public class Board {
 	private ArrayList<BoardRow> board = new ArrayList<BoardRow>();
