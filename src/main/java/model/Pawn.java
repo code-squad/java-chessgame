@@ -17,5 +17,10 @@ public class Pawn implements Piece{
 	public char getRepresentation() {
 		return 'p';
 	}
+	
+	@Override
+	public boolean isMoveable(String currentLocation, String moveLocation) {
+		return true;
+	}
 
 }

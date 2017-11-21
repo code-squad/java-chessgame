@@ -30,19 +30,18 @@ public class BoardRow {
 	public int pieceCount() {
 		int count = 0;
 		for (Piece piece : row) {
-			if (piece != null) {
+			if (piece != null)
 				count++;
-			}
 		}
 		return count;
 	}
-	
-	public void setPiece(String value, Piece piece) {
-		row.set(matchingLocation(value), piece);
+
+	public void setPiece(int index, Piece piece) {
+		row.set(index, piece);
 	}
 
-	public Piece getLocationValue(String value) {
-		return row.get(matchingLocation(value));
+	public Piece getLocationValue(int index) {
+		return row.get(index);
 	}
 
 	private char getChar(int index) {
@@ -66,33 +65,5 @@ public class BoardRow {
 		}
 		inputRow.set(7, new Pawn(color));
 		return inputRow;
-	}
-
-	private int matchingLocation(String locationValue) {
-		Location[] values = Location.values();
-		for (Location location : values) {
-			if (location.getValue().equals(locationValue))
-				return location.getIndex();
-		}
-		throw new IllegalArgumentException(locationValue + "는 유효하지 않은 값입니다.");
-	}
-
-	private enum Location {
-		A(0, "A"), B(1, "B"), C(2, "C"), D(3, "D"), E(4, "E"), F(5, "F"), G(6, "G"), H(7, "H");
-		private int index;
-		private String value;
-
-		Location(int index, String value) {
-			this.index = index;
-			this.value = value;
-		}
-
-		public int getIndex() {
-			return index;
-		}
-
-		public String getValue() {
-			return value;
-		}
-	}
+	}	
 }

@@ -2,10 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import exception.InvalidLocationException;
+import exception.InvalidMoveException;
 import exception.PickNullPieceException;;
 
 public class Board {
@@ -34,9 +32,10 @@ public class Board {
 
 	public void move(String currentLocation, String newLocation) {
 		Piece piece = getPieceInLocation(currentLocation);
-		if (piece == null) {
+		if (piece == null)
 			throw new PickNullPieceException("해당 좌표에 말이 없습니다.");
-		}
+		if(!piece.isMoveable(currentLocation, newLocation))
+			throw new InvalidMoveException("해당 좌표로 움직일 수 없습니다.");
 		setPieceInLocation(newLocation, piece);
 		setPieceInLocation(currentLocation, null);
 	}
@@ -44,25 +43,17 @@ public class Board {
 	private void setPieceInLocation(String location, Piece piece) throws InvalidLocationException {
 		checkInvalidLocationException(location);
 
-		int rowIndex = rowIndex(location);
+		int rowIndex = Location.indexMatchRowLocation(location);
 
 		BoardRow boardRow = board.get(rowIndex);
-		boardRow.setPiece(columnIndex(location), piece);
+		boardRow.setPiece(Location.indexMatchColumnLocation(location), piece);
 		board.set(rowIndex, boardRow);
-	}
-
-	private int rowIndex(String location) {
-		return Integer.parseInt(location.substring(1)) - 1;
-	}
-
-	private String columnIndex(String location) {
-		return location.substring(0, 1);
 	}
 
 	private Piece getPieceInLocation(String location) {
 		checkInvalidLocationException(location);
-		BoardRow boardRow = board.get(rowIndex(location));
-		return boardRow.getLocationValue(columnIndex(location));
+		BoardRow boardRow = board.get(Location.indexMatchRowLocation(location));
+		return boardRow.getLocationValue(Location.indexMatchColumnLocation(location));
 	}
 
 	private void checkInvalidLocationException(String location) {
