@@ -1,8 +1,8 @@
 package chess;
 
 public class MoveRule {
-	String direction;
-	int moveDistance = 0;
+	private String direction;
+	private int moveDistance = 0;
 
 	public MoveRule(String direction) {
 		this.direction = direction;
