@@ -9,9 +9,9 @@ public class Knight {
 	public Knight(String color) {
 		this.color = color;
 		if (color.equals(BLACK)) {
-			expression = "K";
+			expression = "N";
 		} else {
-			expression = "k";
+			expression = "n";
 		}
 	}
 
