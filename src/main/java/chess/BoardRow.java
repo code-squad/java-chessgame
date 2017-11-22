@@ -1,6 +1,15 @@
-package model;
+package chess;
 
 import java.util.ArrayList;
+
+import piece.Bishop;
+import piece.Blank;
+import piece.King;
+import piece.Knight;
+import piece.Pawn;
+import piece.Piece;
+import piece.Queen;
+import piece.Rook;
 
 public class BoardRow {
 	private ArrayList<Piece> row;
@@ -8,7 +17,7 @@ public class BoardRow {
 	public BoardRow() {
 		row = new ArrayList<Piece>();
 		for (int i = 0; i < 8; i++) {
-			row.add(null);
+			row.add(new Blank());
 		}
 	}
 
@@ -30,7 +39,7 @@ public class BoardRow {
 	public int pieceCount() {
 		int count = 0;
 		for (Piece piece : row) {
-			if (piece != null)
+			if (!"Blank".equals(piece.getClass().getSimpleName()))
 				count++;
 		}
 		return count;
@@ -40,7 +49,7 @@ public class BoardRow {
 		row.set(index, piece);
 	}
 
-	public Piece getLocationValue(int index) {
+	public Piece findPiece(int index) {
 		return row.get(index);
 	}
 
@@ -60,10 +69,14 @@ public class BoardRow {
 
 	private ArrayList<Piece> initializeBackLine(String color) {
 		ArrayList<Piece> inputRow = new ArrayList<Piece>();
-		for (int i = 0; i < 8; i++) {
-			inputRow.add(null);
-		}
-		inputRow.set(7, new Pawn(color));
+		inputRow.add(new Rook(color));
+		inputRow.add(new Knight(color));
+		inputRow.add(new Bishop(color));
+		inputRow.add(new Queen(color));
+		inputRow.add(new King(color));
+		inputRow.add(new Bishop(color));
+		inputRow.add(new Knight(color));
+		inputRow.add(new Rook(color));
 		return inputRow;
 	}	
 }

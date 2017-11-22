@@ -1,11 +1,12 @@
-package model;
+package chess;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import exception.PickNullPieceException;
+import chess.Board;
+import exception.PickBlankPieceException;
 
 public class BoardMoveTest {
 	private Board board;
@@ -19,42 +20,42 @@ public class BoardMoveTest {
 	@Test
 	public void boardCreateTest() {
 		assertEquals(
-				appendNewLine("........") + 
+				appendNewLine("rnbqkbnr") + 
 				appendNewLine("pppppppp") + 
 				appendNewLine("........") + 
 				appendNewLine("........") + 
 				appendNewLine("........") + 
 				appendNewLine("........") + 
-				appendNewLine("pppppppp") + 
-				appendNewLine("........"), board.showBoard());
+				appendNewLine("PPPPPPPP") + 
+				appendNewLine("RNBQKBNR"), board.showBoard());
 	}
 
 	@Test
 	public void boardMoveTest1() {
 		board.move("B2", "B3");
 		assertEquals(
-				appendNewLine("........") + 
+				appendNewLine("rnbqkbnr") + 
 				appendNewLine("p.pppppp") + 
 				appendNewLine(".p......") + 
 				appendNewLine("........") + 
 				appendNewLine("........") + 
 				appendNewLine("........") + 
-				appendNewLine("pppppppp") + 
-				appendNewLine("........"), board.showBoard());
+				appendNewLine("PPPPPPPP") + 
+				appendNewLine("RNBQKBNR"), board.showBoard());
 		
 		board.move("B3", "B4");
 		assertEquals(
-				appendNewLine("........") + 
+				appendNewLine("rnbqkbnr") + 
 				appendNewLine("p.pppppp") + 
 				appendNewLine("........") + 
 				appendNewLine(".p......") + 
 				appendNewLine("........") + 
 				appendNewLine("........") + 
-				appendNewLine("pppppppp") + 
-				appendNewLine("........"), board.showBoard());
+				appendNewLine("PPPPPPPP") + 
+				appendNewLine("RNBQKBNR"), board.showBoard());
 	}
 
-	@Test(expected = PickNullPieceException.class)
+	@Test(expected = PickBlankPieceException.class)
 	public void boardMoveExceptionTest() {
 		board.move("B3", "B4");
 	}

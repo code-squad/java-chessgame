@@ -1,7 +1,9 @@
-package model;
+package piece;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import piece.Pawn;
 
 public class PawnTest {
 

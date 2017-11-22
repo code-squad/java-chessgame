@@ -1,9 +1,26 @@
-package model;
+package chess;
 
 import exception.InvalidLocationException;
 
 public class Location {
-	public static int indexMatchColumnLocation(String location) {
+	private int columnIndex;
+	private int rowIndex;
+
+	public Location(String location) {
+		checkInvalidLocationException(location);
+		columnIndex = indexMatchColumnLocation(location);
+		rowIndex = indexMatchRowLocation(location);
+	}
+
+	public int getColumnIndex() {
+		return columnIndex;
+	}
+
+	public int getRowIndex() {
+		return rowIndex;
+	}
+
+	private static int indexMatchColumnLocation(String location) {
 		String locationValue = location.substring(0, 1);
 		ColumnLocation[] values = ColumnLocation.values();
 		for (ColumnLocation columnLocation : values) {
@@ -13,15 +30,20 @@ public class Location {
 		throw new InvalidLocationException(locationValue + "는 유효하지 않은 열의 값입니다.");
 	}
 
-	public static int indexMatchRowLocation(String location) {
+	private static int indexMatchRowLocation(String location) {
 		int index = Integer.parseInt(location.substring(1)) - 1;
 		if (index < 0 || index > 7) {
-			throw new InvalidLocationException(index+"는 유효하지 않은 행의 값입니다.");
+			throw new InvalidLocationException(index + "는 유효하지 않은 행의 값입니다.");
 		}
 		return index;
 	}
 
-	public static enum ColumnLocation {
+	private void checkInvalidLocationException(String location) {
+		if (location.length() != 2)
+			throw new InvalidLocationException("좌표를 잘 못 입력했습니다.");
+	}
+
+	private static enum ColumnLocation {
 		A(0, "A"), B(1, "B"), C(2, "C"), D(3, "D"), E(4, "E"), F(5, "F"), G(6, "G"), H(7, "H");
 		private int index;
 		private String value;
