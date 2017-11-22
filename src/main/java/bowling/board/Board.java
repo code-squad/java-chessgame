@@ -16,6 +16,10 @@ public class Board {
 		return new Board();
 	}
 
+	public List<Row> getRows() {
+		return rows;
+	}
+
 	public String show() {
 		return rowsToString(rows).toString();
 	}
@@ -27,10 +31,6 @@ public class Board {
 			stringBuilder.append("\n");
 		}
 		return stringBuilder;
-	}
-
-	public List<Row> getRows() {
-		return rows;
 	}
 
 	private void createRow() {

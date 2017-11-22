@@ -16,7 +16,7 @@ public class Row {
 
 	private void createPiece(int CHESS_SIZE) {
 		for (int i = 0; i < CHESS_SIZE; i++) {
-			pieces.add(new Pawn());
+			pieces.add(new Pawn("black"));
 		}
 	}
 

@@ -4,15 +4,19 @@ public class Pawn {
 
 	private final static String BLACK = "black";
 	private final static String WHITE = "white";
-	private String color;
 
+	private String color;
 	private int x;
 	private int y;
 	private String expression;
 
 	public Pawn(String color) {
 		this.color = color;
-		expression = "P";
+		if (color.equals(BLACK)) {
+			expression = "P";
+		} else {
+			expression = "p";
+		}
 		x = 0;
 		y = 0;
 	}
