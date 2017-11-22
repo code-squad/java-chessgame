@@ -17,7 +17,7 @@ public class Blank implements Piece {
 	}
 
 	@Override
-	public boolean isMoveable(Location currentLocation, Location moveLocation) {
+	public boolean isMovable(Location currentLocation, Location moveLocation) {
 		throw new PickBlankPieceException("해당 위치에 말이 존재하지 않습니다.");
 	}
 

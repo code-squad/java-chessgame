@@ -25,7 +25,7 @@ public class Rook implements Piece {
 	}
 
 	@Override
-	public boolean isMoveable(Location currentLocation, Location moveLocation) {
+	public boolean isMovable(Location currentLocation, Location moveLocation) {
 		return true;
 	}
 }

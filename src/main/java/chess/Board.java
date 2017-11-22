@@ -34,7 +34,7 @@ public class Board {
 		Location currentLocation = new Location(currentValue);
 		Location newLocation = new Location(newValue);
 		Piece piece = getPieceInLocation(currentLocation);
-		if (!piece.isMoveable(currentLocation, newLocation))
+		if (!piece.isMovable(currentLocation, newLocation))
 			throw new InvalidMoveException("해당 좌표로 움직일 수 없습니다.");
 		setPieceInLocation(newLocation, piece);
 		setPieceInLocation(currentLocation, null);
