@@ -21,11 +21,8 @@ public class BoardRow {
 		}
 	}
 
-	public BoardRow(String line, String color) {
-		if ("front".equals(line))
-			row = initializeFrontLine(color);
-		if ("back".equals(line))
-			row = initializeBackLine(color);
+	private BoardRow(ArrayList<Piece> row) {
+		this.row = row;
 	}
 
 	public String getLine() {
@@ -59,15 +56,15 @@ public class BoardRow {
 		return row.get(index).getRepresentation();
 	}
 
-	private ArrayList<Piece> initializeFrontLine(String color) {
+	public static BoardRow initializePawnLine(String color) {
 		ArrayList<Piece> inputRow = new ArrayList<Piece>();
 		for (int i = 0; i < 8; i++) {
 			inputRow.add(new Pawn(color));
 		}
-		return inputRow;
+		return new BoardRow(inputRow);
 	}
 
-	private ArrayList<Piece> initializeBackLine(String color) {
+	public static BoardRow initializeKingLine(String color) {
 		ArrayList<Piece> inputRow = new ArrayList<Piece>();
 		inputRow.add(new Rook(color));
 		inputRow.add(new Knight(color));
@@ -77,6 +74,6 @@ public class BoardRow {
 		inputRow.add(new Bishop(color));
 		inputRow.add(new Knight(color));
 		inputRow.add(new Rook(color));
-		return inputRow;
-	}	
+		return new BoardRow(inputRow);
+	}
 }

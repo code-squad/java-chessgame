@@ -4,18 +4,19 @@ import java.util.ArrayList;
 
 import exception.InvalidLocationException;
 import exception.InvalidMoveException;
+import piece.Blank;
 import piece.Piece;
 
 public class Board {
 	private ArrayList<BoardRow> board = new ArrayList<BoardRow>();
 
 	public void initialize() {
-		board.add(new BoardRow("back", "white"));
-		board.add(new BoardRow("front", "white"));
+		board.add(BoardRow.initializeKingLine("white"));
+		board.add(BoardRow.initializePawnLine("white"));
 		for (int i = 0; i < 4; i++)
 			board.add(new BoardRow());
-		board.add(new BoardRow("front", "black"));
-		board.add(new BoardRow("back", "black"));
+		board.add(BoardRow.initializePawnLine("black"));
+		board.add(BoardRow.initializeKingLine("black"));
 	}
 
 	public int pieceCount() {
@@ -33,11 +34,14 @@ public class Board {
 	public void move(String currentValue, String newValue) {
 		Location currentLocation = new Location(currentValue);
 		Location newLocation = new Location(newValue);
-		Piece piece = getPieceInLocation(currentLocation);
-		if (!piece.isMovable(currentLocation, newLocation))
-			throw new InvalidMoveException("해당 좌표로 움직일 수 없습니다.");
-		setPieceInLocation(newLocation, piece);
-		setPieceInLocation(currentLocation, null);
+		Piece pickPiece = getPieceInLocation(currentLocation);
+		Piece attackedPiece = getPieceInLocation(newLocation);
+		if (!pickPiece.isMovable(currentLocation, newLocation))
+			throw new InvalidMoveException("말 움직임 규칙에 위반됩니다.");
+		if (attackedPiece.getColor().equals(pickPiece.getColor()))
+			throw new InvalidMoveException("같은 색의 말을 공격할 수 없습니다.");
+		setPieceInLocation(newLocation, pickPiece);
+		setPieceInLocation(currentLocation, new Blank());
 	}
 
 	private void setPieceInLocation(Location location, Piece piece) throws InvalidLocationException {

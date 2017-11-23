@@ -16,7 +16,7 @@ public class MoveRule {
 	public String getDirection() {
 		return direction;
 	}
-	
+
 	public boolean isMove(String moveDirection) {
 		return direction.equals(moveDirection);
 	}

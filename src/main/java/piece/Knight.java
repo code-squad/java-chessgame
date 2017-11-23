@@ -1,13 +1,23 @@
 package piece;
 
 import chess.Location;
+import chess.MoveChecker;
 import exception.InvalidColorException;
 
 public class Knight implements Piece {
 	private String color;
+	private MoveChecker moveChecker = new MoveChecker();
 
 	public Knight(String color) {
 		this.color = color;
+		moveChecker.addRule("NNE");
+		moveChecker.addRule("NNW");
+		moveChecker.addRule("SSE");
+		moveChecker.addRule("SSW");
+		moveChecker.addRule("NEE");
+		moveChecker.addRule("NWW");
+		moveChecker.addRule("SEE");
+		moveChecker.addRule("SWW");
 	}
 
 	@Override
@@ -26,6 +36,6 @@ public class Knight implements Piece {
 
 	@Override
 	public boolean isMovable(Location currentLocation, Location moveLocation) {
-		return true;
+		return moveChecker.isMovable(currentLocation, moveLocation);
 	}
 }
