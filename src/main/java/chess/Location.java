@@ -31,11 +31,11 @@ public class Location {
 	}
 
 	private static int indexMatchRowLocation(String location) {
-		int index = Integer.parseInt(location.substring(1)) - 1;
-		if (index < 0 || index > 7) {
+		int index = Integer.parseInt(location.substring(1));
+		if (index < 1 || index > 8) {
 			throw new InvalidLocationException(index + "는 유효하지 않은 행의 값입니다.");
 		}
-		return index;
+		return index - 1;
 	}
 
 	private void checkInvalidLocationException(String location) {

@@ -2,6 +2,7 @@ package piece;
 
 import chess.Location;
 import chess.MoveChecker;
+import chess.Movement;
 import exception.InvalidColorException;
 
 public class Knight implements Piece {
@@ -10,14 +11,14 @@ public class Knight implements Piece {
 
 	public Knight(String color) {
 		this.color = color;
-		moveChecker.addRule("NNE");
-		moveChecker.addRule("NNW");
-		moveChecker.addRule("SSE");
-		moveChecker.addRule("SSW");
-		moveChecker.addRule("NEE");
-		moveChecker.addRule("NWW");
-		moveChecker.addRule("SEE");
-		moveChecker.addRule("SWW");
+		moveChecker.addRule(new Movement("NNE"));
+		moveChecker.addRule(new Movement("NNW"));
+		moveChecker.addRule(new Movement("SSE"));
+		moveChecker.addRule(new Movement("SSW"));
+		moveChecker.addRule(new Movement("NEE"));
+		moveChecker.addRule(new Movement("NWW"));
+		moveChecker.addRule(new Movement("SEE"));
+		moveChecker.addRule(new Movement("SWW"));
 	}
 
 	@Override
