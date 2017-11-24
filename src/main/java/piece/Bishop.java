@@ -1,25 +1,26 @@
 package piece;
 
 import chess.Location;
+import chess.Board.Color;
 import exception.InvalidColorException;
 
 public class Bishop implements Piece {
-	private String color;
+	private Color color;
 
-	public Bishop(String color) {
+	public Bishop(Color color) {
 		this.color = color;
 	}
 
 	@Override
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
 	@Override
 	public char getRepresentation() {
-		if ("white".equals(color))
+		if (Color.WHITE.equals(color))
 			return 'b';
-		if ("black".equals(color))
+		if (Color.BLACK.equals(color))
 			return 'B';
 		throw new InvalidColorException("잘못된 Bishop의 색상입니다.");
 	}

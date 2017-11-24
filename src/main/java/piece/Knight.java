@@ -1,15 +1,16 @@
 package piece;
 
+import chess.Board.Color;
 import chess.Location;
 import chess.MoveChecker;
 import chess.Movement;
 import exception.InvalidColorException;
 
 public class Knight implements Piece {
-	private String color;
+	private Color color;
 	private MoveChecker moveChecker = new MoveChecker();
 
-	public Knight(String color) {
+	public Knight(Color color) {
 		this.color = color;
 		moveChecker.addRule(new Movement("NNE"));
 		moveChecker.addRule(new Movement("NNW"));
@@ -22,15 +23,15 @@ public class Knight implements Piece {
 	}
 
 	@Override
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
 	@Override
 	public char getRepresentation() {
-		if ("white".equals(color))
+		if (Color.WHITE.equals(color))
 			return 'n';
-		if ("black".equals(color))
+		if (Color.BLACK.equals(color))
 			return 'N';
 		throw new InvalidColorException("잘못된 Knight의 색상입니다.");
 	}

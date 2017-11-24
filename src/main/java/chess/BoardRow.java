@@ -2,6 +2,7 @@ package chess;
 
 import java.util.ArrayList;
 
+import chess.Board.Color;
 import piece.Bishop;
 import piece.Blank;
 import piece.King;
@@ -56,7 +57,7 @@ public class BoardRow {
 		return row.get(index).getRepresentation();
 	}
 
-	public static BoardRow initializePawnLine(String color) {
+	public static BoardRow initializePawnLine(Color color) {
 		ArrayList<Piece> inputRow = new ArrayList<Piece>();
 		for (int i = 0; i < 8; i++) {
 			inputRow.add(new Pawn(color));
@@ -64,7 +65,7 @@ public class BoardRow {
 		return new BoardRow(inputRow);
 	}
 
-	public static BoardRow initializeKingLine(String color) {
+	public static BoardRow initializeKingLine(Color color) {
 		ArrayList<Piece> inputRow = new ArrayList<Piece>();
 		inputRow.add(new Rook(color));
 		inputRow.add(new Knight(color));

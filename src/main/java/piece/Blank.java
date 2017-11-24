@@ -1,13 +1,14 @@
 package piece;
 
+import chess.Board.Color;
 import chess.Location;
 import exception.PickBlankPieceException;
 
 public class Blank implements Piece {
-	private String color = "none";
+	private Color color = Color.NONE;
 
 	@Override
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 

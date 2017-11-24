@@ -1,17 +1,16 @@
 package piece;
 
-import static org.junit.Assert.assertEquals;
-
+import chess.Board.Color;
 import chess.Location;
 import chess.MoveChecker;
 import chess.Movement;
 import exception.InvalidColorException;
 
 public class King implements Piece {
-	private String color;
+	private Color color;
 	private MoveChecker moveChecker = new MoveChecker();
 
-	public King(String color) {
+	public King(Color color) {
 		this.color = color;
 		moveChecker.addRule(new Movement("S"));
 		moveChecker.addRule(new Movement("E"));
@@ -24,15 +23,15 @@ public class King implements Piece {
 	}
 
 	@Override
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
 	@Override
 	public char getRepresentation() {
-		if ("white".equals(color))
+		if (Color.WHITE.equals(color))
 			return 'k';
-		if ("black".equals(color))
+		if (Color.BLACK.equals(color))
 			return 'K';
 		throw new InvalidColorException("잘못된 Kinght의 색상입니다.");
 	}

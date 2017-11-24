@@ -11,12 +11,12 @@ public class Board {
 	private ArrayList<BoardRow> board = new ArrayList<BoardRow>();
 
 	public void initialize() {
-		board.add(BoardRow.initializeKingLine("white"));
-		board.add(BoardRow.initializePawnLine("white"));
+		board.add(BoardRow.initializeKingLine(Color.WHITE));
+		board.add(BoardRow.initializePawnLine(Color.WHITE));
 		for (int i = 0; i < 4; i++)
 			board.add(new BoardRow());
-		board.add(BoardRow.initializePawnLine("black"));
-		board.add(BoardRow.initializeKingLine("black"));
+		board.add(BoardRow.initializePawnLine(Color.BLACK));
+		board.add(BoardRow.initializeKingLine(Color.BLACK));
 	}
 
 	public int pieceCount() {
@@ -54,5 +54,23 @@ public class Board {
 	private Piece getPieceInLocation(Location location) {
 		BoardRow boardRow = board.get(location.getRowIndex());
 		return boardRow.findPiece(location.getColumnIndex());
+	}
+	public static enum Color {
+		WHITE(0, "A"), BLACK(1, "B"), NONE(3, "C");
+		private int index;
+		private String value;
+
+		Color(int index, String value) {
+			this.index = index;
+			this.value = value;
+		}
+
+		public int getIndex() {
+			return index;
+		}
+
+		public String getValue() {
+			return value;
+		}
 	}
 }

@@ -1,25 +1,26 @@
 package piece;
 
+import chess.Board.Color;
 import chess.Location;
 import exception.InvalidColorException;
 
 public class Rook implements Piece {
-	private String color;
+	private Color color;
 
-	public Rook(String color) {
+	public Rook(Color color) {
 		this.color = color;
 	}
 
 	@Override
-	public String getColor() {
+	public Color getColor() {
 		return color;
 	}
 
 	@Override
 	public char getRepresentation() {
-		if ("white".equals(color))
+		if (Color.WHITE.equals(color))
 			return 'r';
-		if ("black".equals(color))
+		if (Color.BLACK.equals(color))
 			return 'R';
 		throw new InvalidColorException("잘못된 Rook의 색상입니다.");
 	}
