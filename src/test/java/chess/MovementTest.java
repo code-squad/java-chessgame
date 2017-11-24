@@ -24,7 +24,7 @@ public class MovementTest {
 		assertEquals(4, new Movement(b2, new Location("B6")).getMoveDistance());
 		assertEquals(1, new Movement(b2, c2).getMoveDistance());
 		assertEquals(2, new Movement(a1, c3).getMoveDistance());
-		assertEquals(0, new Movement(b2, new Location("G3")).getMoveDistance());
+		assertEquals(0, new Movement(b2, new Location("C4")).getMoveDistance());
 	}
 
 	@Test
@@ -34,10 +34,10 @@ public class MovementTest {
 		Movement e = new Movement(b2, c2);
 		Movement n = new Movement(b2, b1);
 		Movement w = new Movement(b2, a2);
-		assertEquals("S", s.getMoveDirection());
-		assertEquals("E", e.getMoveDirection());
-		assertEquals("N", n.getMoveDirection());
-		assertEquals("W", w.getMoveDirection());
+		assertEquals("S", s.getMoveDirection().getDirection());
+		assertEquals("E", e.getMoveDirection().getDirection());
+		assertEquals("N", n.getMoveDirection().getDirection());
+		assertEquals("W", w.getMoveDirection().getDirection());
 		assertEquals(1, s.getMoveDistance());
 		assertEquals(1, e.getMoveDistance());
 		assertEquals(1, n.getMoveDistance());
@@ -51,10 +51,10 @@ public class MovementTest {
 		Movement e2 = new Movement(b2, new Location("D2"));
 		Movement n2 = new Movement(b3, b1);
 		Movement w2 = new Movement(c2, a2);
-		assertEquals("S", s2.getMoveDirection());
-		assertEquals("E", e2.getMoveDirection());
-		assertEquals("N", n2.getMoveDirection());
-		assertEquals("W", w2.getMoveDirection());
+		assertEquals("S", s2.getMoveDirection().getDirection());
+		assertEquals("E", e2.getMoveDirection().getDirection());
+		assertEquals("N", n2.getMoveDirection().getDirection());
+		assertEquals("W", w2.getMoveDirection().getDirection());
 		assertEquals(2, s2.getMoveDistance());
 		assertEquals(2, e2.getMoveDistance());
 		assertEquals(2, n2.getMoveDistance());
@@ -68,10 +68,10 @@ public class MovementTest {
 		Movement sw = new Movement(b2, a3);
 		Movement nw = new Movement(b2, a1);
 		Movement se = new Movement(b2, c3);
-		assertEquals("NE", ne.getMoveDirection());
-		assertEquals("SW", sw.getMoveDirection());
-		assertEquals("NW", nw.getMoveDirection());
-		assertEquals("SE", se.getMoveDirection());
+		assertEquals("NE", ne.getMoveDirection().getDirection());
+		assertEquals("SW", sw.getMoveDirection().getDirection());
+		assertEquals("NW", nw.getMoveDirection().getDirection());
+		assertEquals("SE", se.getMoveDirection().getDirection());
 		assertEquals(1, ne.getMoveDistance());
 		assertEquals(1, sw.getMoveDistance());
 		assertEquals(1, nw.getMoveDistance());
@@ -85,10 +85,10 @@ public class MovementTest {
 		Movement sw2 = new Movement(c1, a3);
 		Movement nw2 = new Movement(c3, a1);
 		Movement se2 = new Movement(a1, c3);
-		assertEquals("NE", ne2.getMoveDirection());
-		assertEquals("SW", sw2.getMoveDirection());
-		assertEquals("NW", nw2.getMoveDirection());
-		assertEquals("SE", se2.getMoveDirection());
+		assertEquals("NE", ne2.getMoveDirection().getDirection());
+		assertEquals("SW", sw2.getMoveDirection().getDirection());
+		assertEquals("NW", nw2.getMoveDirection().getDirection());
+		assertEquals("SE", se2.getMoveDirection().getDirection());
 		assertEquals(2, ne2.getMoveDistance());
 		assertEquals(2, sw2.getMoveDistance());
 		assertEquals(2, nw2.getMoveDistance());
@@ -106,14 +106,14 @@ public class MovementTest {
 		Movement nww = new Movement(c2, a1);
 		Movement see = new Movement(b3, new Location("D4"));
 		Movement sww = new Movement(c3, new Location("A4"));
-		assertEquals("NNE", nne.getMoveDirection());
-		assertEquals("NNW", nnw.getMoveDirection());
-		assertEquals("SSE", sse.getMoveDirection());
-		assertEquals("SSW", ssw.getMoveDirection());
-		assertEquals("NEE", nee.getMoveDirection());
-		assertEquals("NWW", nww.getMoveDirection());
-		assertEquals("SEE", see.getMoveDirection());
-		assertEquals("SWW", sww.getMoveDirection());
+		assertEquals("NNE", nne.getMoveDirection().getDirection());
+		assertEquals("NNW", nnw.getMoveDirection().getDirection());
+		assertEquals("SSE", sse.getMoveDirection().getDirection());
+		assertEquals("SSW", ssw.getMoveDirection().getDirection());
+		assertEquals("NEE", nee.getMoveDirection().getDirection());
+		assertEquals("NWW", nww.getMoveDirection().getDirection());
+		assertEquals("SEE", see.getMoveDirection().getDirection());
+		assertEquals("SWW", sww.getMoveDirection().getDirection());
 		assertEquals(0, nne.getMoveDistance());
 		assertEquals(0, nnw.getMoveDistance());
 		assertEquals(0, sse.getMoveDistance());

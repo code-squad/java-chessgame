@@ -1,6 +1,7 @@
 package piece;
 
 import chess.Board.Color;
+import chess.Movement.Direction;
 import chess.Location;
 import chess.MoveChecker;
 import chess.Movement;
@@ -12,14 +13,14 @@ public class Knight implements Piece {
 
 	public Knight(Color color) {
 		this.color = color;
-		moveChecker.addRule(new Movement("NNE"));
-		moveChecker.addRule(new Movement("NNW"));
-		moveChecker.addRule(new Movement("SSE"));
-		moveChecker.addRule(new Movement("SSW"));
-		moveChecker.addRule(new Movement("NEE"));
-		moveChecker.addRule(new Movement("NWW"));
-		moveChecker.addRule(new Movement("SEE"));
-		moveChecker.addRule(new Movement("SWW"));
+		moveChecker.addRule(new Movement(Direction.NNE));
+		moveChecker.addRule(new Movement(Direction.NNW));
+		moveChecker.addRule(new Movement(Direction.SSE));
+		moveChecker.addRule(new Movement(Direction.SSW));
+		moveChecker.addRule(new Movement(Direction.NEE));
+		moveChecker.addRule(new Movement(Direction.NWW));
+		moveChecker.addRule(new Movement(Direction.SEE));
+		moveChecker.addRule(new Movement(Direction.SWW));
 	}
 
 	@Override

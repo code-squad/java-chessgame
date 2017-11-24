@@ -4,6 +4,7 @@ import chess.Board.Color;
 import chess.Location;
 import chess.MoveChecker;
 import chess.Movement;
+import chess.Movement.Direction;
 import exception.InvalidColorException;
 
 public class King implements Piece {
@@ -12,14 +13,14 @@ public class King implements Piece {
 
 	public King(Color color) {
 		this.color = color;
-		moveChecker.addRule(new Movement("S"));
-		moveChecker.addRule(new Movement("E"));
-		moveChecker.addRule(new Movement("N"));
-		moveChecker.addRule(new Movement("W"));
-		moveChecker.addRule(new Movement("NE"));
-		moveChecker.addRule(new Movement("SW"));
-		moveChecker.addRule(new Movement("NW"));
-		moveChecker.addRule(new Movement("SE"));
+		moveChecker.addRule(new Movement(Direction.S));
+		moveChecker.addRule(new Movement(Direction.E));
+		moveChecker.addRule(new Movement(Direction.N));
+		moveChecker.addRule(new Movement(Direction.W));
+		moveChecker.addRule(new Movement(Direction.NE));
+		moveChecker.addRule(new Movement(Direction.SW));
+		moveChecker.addRule(new Movement(Direction.NW));
+		moveChecker.addRule(new Movement(Direction.SE));
 	}
 
 	@Override

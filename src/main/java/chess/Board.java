@@ -55,18 +55,13 @@ public class Board {
 		BoardRow boardRow = board.get(location.getRowIndex());
 		return boardRow.findPiece(location.getColumnIndex());
 	}
+
 	public static enum Color {
-		WHITE(0, "A"), BLACK(1, "B"), NONE(3, "C");
-		private int index;
+		WHITE("white"), BLACK("black"), NONE("none");
 		private String value;
 
-		Color(int index, String value) {
-			this.index = index;
+		Color(String value) {
 			this.value = value;
-		}
-
-		public int getIndex() {
-			return index;
 		}
 
 		public String getValue() {

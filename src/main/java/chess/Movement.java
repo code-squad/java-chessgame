@@ -3,7 +3,7 @@ package chess;
 import exception.InvalidMoveException;
 
 public class Movement {
-	private String moveDirection;
+	private Direction moveDirection;
 	private int moveDistance;
 
 	public Movement(Location currentLocation, Location moveLocation) {
@@ -25,16 +25,16 @@ public class Movement {
 		return 0;
 	}
 
-	public Movement(String moveDirection, int moveDistance) {
+	public Movement(Direction moveDirection, int moveDistance) {
 		this.moveDirection = moveDirection;
 		this.moveDistance = moveDistance;
 	}
 
-	public Movement(String moveDirection) {
+	public Movement(Direction moveDirection) {
 		this.moveDirection = moveDirection;
 	}
 
-	public String getMoveDirection() {
+	public Direction getMoveDirection() {
 		return moveDirection;
 	}
 
@@ -43,7 +43,7 @@ public class Movement {
 	}
 
 	public boolean equals(Movement move) {
-		String direction = move.getMoveDirection();
+		Direction direction = move.getMoveDirection();
 		int distance = move.getMoveDistance();
 		if (move.getMoveDistance() < 0)
 			return moveDirection.equals(direction) && moveDistance == distance;
@@ -58,7 +58,7 @@ public class Movement {
 		return moveLocation.getColumnIndex() - currentLocation.getColumnIndex();
 	}
 
-	private String moveDirection(int rowDistance, int columnDistance) {
+	private Direction moveDirection(int rowDistance, int columnDistance) {
 		if (columnDistance == 0 && rowDistance == 0)
 			throw new InvalidMoveException("잘못된 이동입니다. (이동거리가 없습니다.)");
 		if (Math.abs(columnDistance) == Math.abs(rowDistance) || columnDistance == 0 || rowDistance == 0)
@@ -70,8 +70,7 @@ public class Movement {
 		for (int i = 0; i < Math.abs(columnDistance); i++) {
 			direction += columnDirection(columnDistance);
 		}
-
-		return direction;
+		return Direction.valueOf(direction);
 	}
 
 	private String rowDirection(int rowDistance) {
@@ -90,10 +89,34 @@ public class Movement {
 		return "";
 	}
 
-	private String eightDirection(int columnDistance, int rowDistance) {
+	private Direction eightDirection(int columnDistance, int rowDistance) {
 		String direction = "";
 		direction += rowDirection(rowDistance);
 		direction += columnDirection(columnDistance);
-		return direction;
+		return Direction.valueOf(direction);
+	}
+
+	public static enum Direction {
+		N("N"), S("S"), E("E"), W("W"), NE("NE"), NW("NW"), SE("SE"), SW("SW"), NNE("NNE"), NNW("NNW"), NEE("NEE"), NWW(
+				"NWW"), SSE("SSE"), SSW("SSW"), SEE("SEE"), SWW("SWW");
+
+		private String direction;
+
+		Direction(String direction) {
+			this.direction = direction;
+		}
+
+		public String getDirection() {
+			return direction;
+		}
+
+//		public static Direction valueOf(String directionValue) {
+//			Direction[] values = Direction.values();
+//			for (Direction direction : values) {
+//				if (direction.getDirection().equals(directionValue))
+//					return direction;
+//			}
+//			throw new InvalidDirectionException("잘못된 방향입니다.");
+//		}
 	}
 }
