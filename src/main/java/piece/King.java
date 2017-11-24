@@ -13,14 +13,14 @@ public class King implements Piece {
 
 	public King(Color color) {
 		this.color = color;
-		moveChecker.addRule(new Movement(Direction.S));
-		moveChecker.addRule(new Movement(Direction.E));
-		moveChecker.addRule(new Movement(Direction.N));
-		moveChecker.addRule(new Movement(Direction.W));
-		moveChecker.addRule(new Movement(Direction.NE));
-		moveChecker.addRule(new Movement(Direction.SW));
-		moveChecker.addRule(new Movement(Direction.NW));
-		moveChecker.addRule(new Movement(Direction.SE));
+		moveChecker.addRule(new Movement(Direction.S, 1));
+		moveChecker.addRule(new Movement(Direction.E, 1));
+		moveChecker.addRule(new Movement(Direction.N, 1));
+		moveChecker.addRule(new Movement(Direction.W, 1));
+		moveChecker.addRule(new Movement(Direction.NE, 1));
+		moveChecker.addRule(new Movement(Direction.SW, 1));
+		moveChecker.addRule(new Movement(Direction.NW, 1));
+		moveChecker.addRule(new Movement(Direction.SE, 1));
 	}
 
 	@Override

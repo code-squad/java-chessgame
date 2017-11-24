@@ -13,18 +13,6 @@ public class Movement {
 		moveDistance = moveDistance(rowDistance, columnDistance);
 	}
 
-	private int moveDistance(int rowDistance, int columnDistance) {
-		int row = Math.abs(rowDistance);
-		int column = Math.abs(columnDistance);
-		if (row == 0)
-			return column;
-		if (column == 0)
-			return Math.abs(row);
-		if (row == column)
-			return row;
-		return 0;
-	}
-
 	public Movement(Direction moveDirection, int moveDistance) {
 		this.moveDirection = moveDirection;
 		this.moveDistance = moveDistance;
@@ -45,9 +33,21 @@ public class Movement {
 	public boolean equals(Movement move) {
 		Direction direction = move.getMoveDirection();
 		int distance = move.getMoveDistance();
-		if (move.getMoveDistance() < 0)
+		if (move.getMoveDistance() > 0)
 			return moveDirection.equals(direction) && moveDistance == distance;
 		return moveDirection.equals(direction);
+	}
+
+	private int moveDistance(int rowDistance, int columnDistance) {
+		int row = Math.abs(rowDistance);
+		int column = Math.abs(columnDistance);
+		if (row == 0)
+			return column;
+		if (column == 0)
+			return Math.abs(row);
+		if (row == column)
+			return row;
+		return 0;
 	}
 
 	private int rowDistance(Location currentLocation, Location moveLocation) {
@@ -109,14 +109,5 @@ public class Movement {
 		public String getDirection() {
 			return direction;
 		}
-
-//		public static Direction valueOf(String directionValue) {
-//			Direction[] values = Direction.values();
-//			for (Direction direction : values) {
-//				if (direction.getDirection().equals(directionValue))
-//					return direction;
-//			}
-//			throw new InvalidDirectionException("잘못된 방향입니다.");
-//		}
 	}
 }

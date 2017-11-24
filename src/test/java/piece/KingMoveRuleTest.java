@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import chess.Board;
+import exception.InvalidMoveException;
 
 public class KingMoveRuleTest {
 	private Board board;
@@ -122,6 +123,21 @@ public class KingMoveRuleTest {
 			appendNewLine("........") + 
 			appendNewLine("PPPPKPPP") + 
 			appendNewLine("RNBQ.BNR"), board.showBoard());
+	}
+	
+	@Test(expected = InvalidMoveException.class)
+	public void kingMoveException1() {
+		board.move("E6", "A6");
+	}
+	
+	@Test(expected = InvalidMoveException.class)
+	public void kingMoveException2() {
+		board.move("E6", "E8");
+	}
+	
+	@Test(expected = InvalidMoveException.class)
+	public void kingMoveException3() {
+		board.move("E6", "C4");
 	}
 	
 	private String appendNewLine(String value) {
