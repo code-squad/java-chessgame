@@ -1,52 +1,21 @@
 package chess.piece;
 
-public class Queen {
+import chess.board.Position;
 
-	private static final Object BLACK = "black";
-	private String color;
-	private String expression;
+public class Queen extends Piece {
 
-	public Queen(String color) {
-		this.color = color;
-		if (color.equals(BLACK)) {
-			expression = "Q";
-		} else {
-			expression = "q";
-		}
+	private Queen(Type type, Color color, Position position) {
+		super(type, color, position);
 	}
 
-	public static Queen create(String color) {
-		return new Queen(color);
+	public static Piece create(Type type, Color color, Position position) {
+		return new Queen(type, color, position);
 	}
 
 	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((expression == null) ? 0 : expression.hashCode());
-		return result;
+	public Piece move(Position position) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Queen other = (Queen) obj;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		if (expression == null) {
-			if (other.expression != null)
-				return false;
-		} else if (!expression.equals(other.expression))
-			return false;
-		return true;
-	}
 }

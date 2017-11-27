@@ -1,52 +1,29 @@
 package chess.piece;
 
-public class Knight {
+import chess.board.Position;
 
-	private static final Object BLACK = "black";
-	private String color;
-	private String expression;
+public class Knight extends Piece {
 
-	public Knight(String color) {
-		this.color = color;
-		if (color.equals(BLACK)) {
-			expression = "N";
-		} else {
-			expression = "n";
+	private Knight(Type type, Color color, Position position) {
+		super(type, color, position);
+	}
+
+	public static Piece create(Type type, Color color, int no) {
+		if (color == Color.WHITE) {
+			if (no == 0) {
+				return new Knight(type, color, Position.setup(1, 0));
+			}
+			return new Knight(type, color, Position.setup(6, 0));
 		}
-	}
-
-	public static Knight create(String color) {
-		return new Knight(color);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((expression == null) ? 0 : expression.hashCode());
-		return result;
+		if (no == 1) {
+			return new Knight(type, color, Position.setup(6, 7));
+		}
+		return new Knight(type, color, Position.setup(1, 7));
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Knight other = (Knight) obj;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		if (expression == null) {
-			if (other.expression != null)
-				return false;
-		} else if (!expression.equals(other.expression))
-			return false;
-		return true;
+	public Piece move(Position position) {
+		return new Knight(this.getType(), this.getColor(), position);
 	}
+
 }

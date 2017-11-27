@@ -1,53 +1,28 @@
 package chess.piece;
 
-public class King {
+import chess.board.Position;
+import chess.exception.FreezeException;
 
-	private static final Object BLACK = "black";
-	private String color;
-	private String expression;
+public class King extends Piece {
 
-	public King(String color) {
-		this.color = color;
-		if (color.equals(BLACK)) {
-			expression = "K";
-		} else {
-			expression = "k";
+	private King(Type type, Color color, Position position) {
+		super(type, color, position);
+	}
+
+	public static Piece create(Type type, Color color, Position position) {
+		return new King(type, color, position);
+	}
+
+	@Override
+	public Piece move(Position position) {
+		if (this.getPosition().getXPosition() - position.getXPosition() > 2
+				| position.getXPosition() - this.getPosition().getXPosition() < -1) {
+			throw new FreezeException();
 		}
+		if (this.getPosition().getYPosition() - position.getYPosition() > 2
+				| position.getYPosition() - this.getPosition().getYPosition() < -1) {
+			throw new FreezeException();
+		}
+		return new King(this.getType(), this.getColor(), position);
 	}
-
-	public static King create(String color) {
-		return new King(color);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((expression == null) ? 0 : expression.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		King other = (King) obj;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		if (expression == null) {
-			if (other.expression != null)
-				return false;
-		} else if (!expression.equals(other.expression))
-			return false;
-		return true;
-	}
-
 }

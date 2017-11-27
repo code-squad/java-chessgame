@@ -1,53 +1,30 @@
 package chess.piece;
 
-public class Bishop {
+import chess.board.Position;
 
-	private static final String BLACK = "black";
-	private String color;
-	private String expression;
+public class Bishop extends Piece {
 
-	public Bishop(String color) {
-		this.color = color;
-		if (color.equals(BLACK)) {
-			expression = "B";
-		} else {
-			expression = "b";
+	private Bishop(Type type, Color color, Position position) {
+		super(type, color, position);
+	}
+
+	public static Piece create(Type type, Color color, int no) {
+		if (color == Color.WHITE) {
+			if (no == 0) {
+				return new Bishop(type, color, Position.setup(2, 0));
+			}
+			return new Bishop(type, color, Position.setup(5, 0));
 		}
-	}
-
-	public static Bishop create(String color) {
-		return new Bishop(color);
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((expression == null) ? 0 : expression.hashCode());
-		return result;
+		if (no == 1) {
+			return new Bishop(type, color, Position.setup(5, 7));
+		}
+		return new Bishop(type, color, Position.setup(2, 7));
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Bishop other = (Bishop) obj;
-		if (color == null) {
-			if (other.color != null)
-				return false;
-		} else if (!color.equals(other.color))
-			return false;
-		if (expression == null) {
-			if (other.expression != null)
-				return false;
-		} else if (!expression.equals(other.expression))
-			return false;
-		return true;
+	public Piece move(Position position) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
