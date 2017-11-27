@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import chess.board.Board;
 import chess.view.ChessFormView;
+import chess.view.ChessResultView;
 
 public class Chess {
 
@@ -13,11 +14,13 @@ public class Chess {
 	public static void main(String[] args) {
 		Board board = new Board();
 		board.create();
-		log.debug("{}", board.show());
+		ChessResultView result = board.result();
+		log.debug("{}", result.show());
 		String command;
 		do {
 			command = ChessFormView.inputCommand();
-			log.debug("{}", board.show());
+			result = board.result();
+			log.debug("{}", result.show());
 		} while (!command.equals("end"));
 	}
 }

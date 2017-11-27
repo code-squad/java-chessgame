@@ -9,8 +9,6 @@ import chess.piece.Piece.Type;
 
 public class Rank {
 
-	// private static final Logger log = LoggerFactory.getLogger(Rank.class);
-
 	private List<Piece> pieces;
 
 	private Rank(Type type) {

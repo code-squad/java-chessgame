@@ -6,6 +6,8 @@ import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import chess.view.ChessResultView;
+
 public class BoardTest {
 
 	private static final Logger log = LoggerFactory.getLogger(BoardTest.class);
@@ -14,18 +16,20 @@ public class BoardTest {
 	public void create() {
 		Board board = new Board();
 		board.create();
-		log.debug("현재 board의 모양 {}", board.show());
+		ChessResultView result = board.result();
+		log.debug("현재 board의 모양 {}", result.show());
 		assertEquals("RNBQKBNR\n" + "PPPPPPPP\n" + "........\n" + "........\n" + "........\n" + "........\n"
-				+ "pppppppp\n" + "rnbqkbnr\n", board.show());
+				+ "pppppppp\n" + "rnbqkbnr\n", result.show());
 	}
 
 	@Test
 	public void createEmptyBoard() {
 		Board board = new Board();
 		board.emptyBoard();
-		log.debug("현재 board의 모양 {}", board.show());
+		ChessResultView result = board.result();
+		log.debug("현재 board의 모양 {}", result.show());
 		assertEquals("........\n" + "........\n" + "........\n" + "........\n" + "........\n" + "........\n"
-				+ "........\n" + "........\n", board.show());
+				+ "........\n" + "........\n", result.show());
 	}
 
 	@Test

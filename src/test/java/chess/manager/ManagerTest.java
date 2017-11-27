@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import chess.board.Board;
 import chess.board.Position;
 import chess.piece.Piece;
+import chess.view.ChessResultView;
 
 public class ManagerTest {
 	private static final Logger log = LoggerFactory.getLogger(ManagerTest.class);
@@ -19,7 +20,8 @@ public class ManagerTest {
 		board.create();
 		Manager manager = new Manager();
 		Piece piece = manager.findPiece(board, Position.create("f1"));
-		log.debug("현재 board의 모양 {}", board.show());
+		ChessResultView result = board.result();
+		log.debug("현재 board의 모양 {}", result.show());
 		assertEquals(piece, Piece.createWhiteBishop(1));
 	}
 
@@ -31,9 +33,10 @@ public class ManagerTest {
 		manager.addPiece(board, Position.create("a6"), Piece.createWhiteBishop(1));
 		manager.addPiece(board, Position.create("b2"), Piece.createWhitePawn(1));
 		manager.addPiece(board, Position.create("h3"), Piece.createBlackKing());
-		log.debug("현재 board의 모양 {}", board.show());
+		ChessResultView result = board.result();
+		log.debug("현재 board의 모양 {}", result.show());
 		assertEquals("........\n" + "........\n" + "b.......\n" + "........\n" + "........\n" + ".......K\n"
-				+ ".p......\n" + "........\n", board.show());
+				+ ".p......\n" + "........\n", result.show());
 	}
 
 	@Test
@@ -45,9 +48,10 @@ public class ManagerTest {
 		Position sourcePosition = Position.create("b2");
 		Position targetPosition = Position.create("b4");
 		board.move(sourcePosition, targetPosition);
-		log.debug("현재 board의 모양 {}", board.show());
+		ChessResultView result = board.result();
+		log.debug("현재 board의 모양 {}", result.show());
 		assertEquals("........\n" + "........\n" + "........\n" + "........\n" + ".p......\n" + "........\n"
-				+ "........\n" + "........\n", board.show());
+				+ "........\n" + "........\n", result.show());
 		assertEquals(manager.findPiece(board, targetPosition), Piece.createWhitePawn(1));
 	}
 }

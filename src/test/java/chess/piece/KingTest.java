@@ -53,9 +53,8 @@ public class KingTest {
 	}
 
 	@Test
-	public void isMove() throws Exception {
+	public void isMove_1() throws Exception {
 		Piece king = King.create(Type.KING, Color.WHITE, Position.create("e1"));
 		assertTrue(king.isMove(Position.create("d1")));
 	}
-
 }

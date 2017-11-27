@@ -2,6 +2,7 @@ package chess.piece;
 
 import chess.board.Position;
 import chess.exception.FreezeException;
+import chess.manager.Route;
 
 public class King extends Piece {
 
@@ -15,6 +16,8 @@ public class King extends Piece {
 
 	@Override
 	public Piece move(Position position) {
+		Route.KnightRoute.values();
+		
 		if (this.getPosition().getXPosition() - position.getXPosition() > 2
 				| position.getXPosition() - this.getPosition().getXPosition() < -1) {
 			throw new FreezeException();

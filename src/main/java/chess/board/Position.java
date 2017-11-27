@@ -1,13 +1,8 @@
 package chess.board;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import chess.exception.FreezeException;
 
 public class Position {
-
-	private static final Logger log = LoggerFactory.getLogger(Position.class);
 
 	private int xPosition, yPosition;
 
