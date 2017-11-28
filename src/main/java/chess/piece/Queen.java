@@ -14,7 +14,6 @@ public class Queen extends Piece {
 
 	@Override
 	public Piece move(Position position) {
-		// TODO Auto-generated method stub
-		return null;
+		return new Queen(this.getType(), this.getColor(), position);
 	}
 }

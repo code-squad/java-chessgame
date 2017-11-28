@@ -20,9 +20,9 @@ public class Rook extends Piece {
 
 	public static Piece createBlackRook(int no) {
 		if (no == 0) {
-			return new Rook(Type.ROOK, Color.BLACK, Position.setup(7, 7));
+			return new Rook(Type.ROOK, Color.BLACK, Position.setup(0, 7));
 		}
-		return new Rook(Type.ROOK, Color.BLACK, Position.setup(0, 7));
+		return new Rook(Type.ROOK, Color.BLACK, Position.setup(7, 7));
 	}
 
 	public static Piece createWhiteRook(int no) {

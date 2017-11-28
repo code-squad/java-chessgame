@@ -20,9 +20,9 @@ public class Bishop extends Piece {
 
 	public static Piece createBlackBishop(int no) {
 		if (no == 0) {
-			return new Bishop(Type.BISHOP, Color.BLACK, Position.setup(5, 7));
+			return new Bishop(Type.BISHOP, Color.BLACK, Position.setup(2, 7));
 		}
-		return new Bishop(Type.BISHOP, Color.BLACK, Position.setup(2, 7));
+		return new Bishop(Type.BISHOP, Color.BLACK, Position.setup(5, 7));
 	}
 
 	public static Piece createWhiteBishop(int no) {

@@ -35,4 +35,10 @@ public class RookTest {
 		Piece whiteRook = Rook.createWhiteRook(0);
 		whiteRook.move(Position.create("b8"));
 	}
+
+	@Test(expected = FreezeException.class)
+	public void 이동실패2() throws Exception {
+		Piece whiteRook = Rook.createBlackRook(0);
+		whiteRook.move(Position.create("h2"));
+	}
 }

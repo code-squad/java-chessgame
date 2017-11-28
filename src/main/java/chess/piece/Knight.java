@@ -15,9 +15,9 @@ public class Knight extends Piece {
 
 	public static Piece createBlackKnight(int no) {
 		if (no == 0) {
-			return new Knight(Type.KNIGHT, Color.BLACK, Position.setup(6, 7));
+			return new Knight(Type.KNIGHT, Color.BLACK, Position.setup(1, 7));
 		}
-		return new Knight(Type.KNIGHT, Color.BLACK, Position.setup(1, 7));
+		return new Knight(Type.KNIGHT, Color.BLACK, Position.setup(6, 7));
 	}
 
 	public static Piece createWhiteKnight(int no) {

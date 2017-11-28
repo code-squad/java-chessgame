@@ -23,9 +23,4 @@ public class King extends Piece {
 		}
 		return new King(this.getType(), this.getColor(), position);
 	}
-
-	public static Piece createBlackKing(Position setup) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 }

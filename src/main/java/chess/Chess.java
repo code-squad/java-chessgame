@@ -31,7 +31,7 @@ public class Chess {
 					result = board.result();
 					log.debug(result.show());
 				}
-			} catch (FreezeException e) {
+			} catch (FreezeException | ArrayIndexOutOfBoundsException e) {
 				log.debug(e.getMessage());
 			}
 		} while (!command.equals("end"));
