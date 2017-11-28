@@ -1,5 +1,7 @@
 package chess.board;
 
+import java.util.List;
+
 import chess.exception.FreezeException;
 
 public class Position {
@@ -14,11 +16,11 @@ public class Position {
 	private Position(String position) {
 		xPosition = position.charAt(0) - 'a';
 		if (xPosition < -1 | xPosition > 7) {
-			throw new FreezeException();
+			throw new FreezeException("x의 값은 a~h사이의 값을 입력해주세요");
 		}
 		yPosition = Character.getNumericValue(position.charAt(1)) - 1;
 		if (yPosition < -1 | yPosition > 7) {
-			throw new FreezeException();
+			throw new FreezeException("y의 값은 1~8사이의 값을 입력해주세요");
 		}
 	}
 
@@ -66,6 +68,11 @@ public class Position {
 		if (yPosition != other.yPosition)
 			return false;
 		return true;
+	}
+
+	public void calculatePosition(List<Position> positions) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

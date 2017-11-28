@@ -8,7 +8,11 @@ import org.slf4j.LoggerFactory;
 
 import chess.board.Board;
 import chess.board.Position;
+import chess.piece.Bishop;
+import chess.piece.King;
+import chess.piece.Pawn;
 import chess.piece.Piece;
+import chess.piece.Piece.Color;
 import chess.view.ChessResultView;
 
 public class ManagerTest {
@@ -22,7 +26,7 @@ public class ManagerTest {
 		Piece piece = manager.findPiece(board, Position.create("f1"));
 		ChessResultView result = board.result();
 		log.debug("현재 board의 모양 {}", result.show());
-		assertEquals(piece, Piece.createWhiteBishop(1));
+		assertEquals(piece, Bishop.createWhiteBishop(1));
 	}
 
 	@Test
@@ -30,9 +34,9 @@ public class ManagerTest {
 		Board board = new Board();
 		board.emptyBoard();
 		Manager manager = new Manager();
-		manager.addPiece(board, Position.create("a6"), Piece.createWhiteBishop(1));
-		manager.addPiece(board, Position.create("b2"), Piece.createWhitePawn(1));
-		manager.addPiece(board, Position.create("h3"), Piece.createBlackKing());
+		manager.addPiece(board, Position.create("a6"), Bishop.createWhiteBishop(1));
+		manager.addPiece(board, Position.create("b2"), Pawn.createWhitePawn(Position.create("b2")));
+		manager.addPiece(board, Position.create("h3"), King.create(Color.BLACK, Position.create("h3")));
 		ChessResultView result = board.result();
 		log.debug("현재 board의 모양 {}", result.show());
 		assertEquals("........\n" + "........\n" + "b.......\n" + "........\n" + "........\n" + ".......K\n"
@@ -44,7 +48,7 @@ public class ManagerTest {
 		Board board = new Board();
 		board.emptyBoard();
 		Manager manager = new Manager();
-		manager.addPiece(board, Position.create("b2"), Piece.createWhitePawn(1));
+		manager.addPiece(board, Position.create("b2"), Pawn.createWhitePawn(Position.create("b2")));
 		Position sourcePosition = Position.create("b2");
 		Position targetPosition = Position.create("b4");
 		board.move(sourcePosition, targetPosition);
@@ -52,6 +56,6 @@ public class ManagerTest {
 		log.debug("현재 board의 모양 {}", result.show());
 		assertEquals("........\n" + "........\n" + "........\n" + "........\n" + ".p......\n" + "........\n"
 				+ "........\n" + "........\n", result.show());
-		assertEquals(manager.findPiece(board, targetPosition), Piece.createWhitePawn(1));
+		assertEquals(manager.findPiece(board, targetPosition), Pawn.createWhitePawn(Position.create("b2")));
 	}
 }

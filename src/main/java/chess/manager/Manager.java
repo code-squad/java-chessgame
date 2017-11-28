@@ -5,6 +5,7 @@ import java.util.List;
 import chess.board.Board;
 import chess.board.Position;
 import chess.board.Rank;
+import chess.piece.Blank;
 import chess.piece.Piece;
 
 public class Manager {
@@ -21,6 +22,6 @@ public class Manager {
 
 	public void makeEmpty(Board board, Position position) {
 		List<Rank> ranks = board.getRanks();
-		ranks.get(position.getYPosition()).getPieces().set(position.getXPosition(), Piece.createBlank());
+		ranks.get(position.getYPosition()).getPieces().set(position.getXPosition(), Blank.create());
 	}
 }

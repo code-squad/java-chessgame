@@ -8,8 +8,12 @@ public class Pawn extends Piece {
 		super(type, color, position);
 	}
 
-	public static Piece create(Type type, Color color, Position position) {
-		return new Pawn(type, color, position);
+	public static Piece createWhitePawn(Position position) {
+		return new Pawn(Type.PAWN, Color.WHITE, position);
+	}
+
+	public static Piece createBlackPawn(Position position) {
+		return new Pawn(Type.PAWN, Color.BLACK, position);
 	}
 
 	@Override

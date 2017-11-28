@@ -2,7 +2,6 @@ package chess.piece;
 
 import chess.board.Position;
 import chess.exception.FreezeException;
-import chess.manager.Route;
 
 public class King extends Piece {
 
@@ -10,22 +9,23 @@ public class King extends Piece {
 		super(type, color, position);
 	}
 
-	public static Piece create(Type type, Color color, Position position) {
-		return new King(type, color, position);
+	public static Piece create(Color color, Position position) {
+		return new King(Type.KING, color, position);
 	}
 
 	@Override
 	public Piece move(Position position) {
-		Route.KnightRoute.values();
-		
-		if (this.getPosition().getXPosition() - position.getXPosition() > 2
-				| position.getXPosition() - this.getPosition().getXPosition() < -1) {
+		if (this.getXPosition() - position.getXPosition() > 2 | position.getXPosition() - this.getXPosition() < -1) {
 			throw new FreezeException();
 		}
-		if (this.getPosition().getYPosition() - position.getYPosition() > 2
-				| position.getYPosition() - this.getPosition().getYPosition() < -1) {
+		if (this.getYPosition() - position.getYPosition() > 2 | position.getYPosition() - this.getYPosition() < -1) {
 			throw new FreezeException();
 		}
 		return new King(this.getType(), this.getColor(), position);
+	}
+
+	public static Piece createBlackKing(Position setup) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

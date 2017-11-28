@@ -8,8 +8,8 @@ public class Queen extends Piece {
 		super(type, color, position);
 	}
 
-	public static Piece create(Type type, Color color, Position position) {
-		return new Queen(type, color, position);
+	public static Piece create(Color color, Position position) {
+		return new Queen(Type.QUEEN, color, position);
 	}
 
 	@Override
@@ -17,5 +17,4 @@ public class Queen extends Piece {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
 }

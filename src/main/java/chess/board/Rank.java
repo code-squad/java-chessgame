@@ -3,9 +3,16 @@ package chess.board;
 import java.util.ArrayList;
 import java.util.List;
 
+import chess.piece.Bishop;
+import chess.piece.Blank;
+import chess.piece.King;
+import chess.piece.Knight;
+import chess.piece.Pawn;
 import chess.piece.Piece;
 import chess.piece.Piece.Color;
 import chess.piece.Piece.Type;
+import chess.piece.Queen;
+import chess.piece.Rook;
 
 public class Rank {
 
@@ -18,7 +25,7 @@ public class Rank {
 
 	private void addBlank(Type type) {
 		for (int i = 0; i < 8; i++) {
-			pieces.add(Piece.createBlank());
+			pieces.add(Blank.create());
 		}
 	}
 
@@ -41,36 +48,36 @@ public class Rank {
 	}
 
 	private void addSpecialBlackPiece() {
-		pieces.add(Piece.createBlackRook(0));
-		pieces.add(Piece.createBlackKnight(0));
-		pieces.add(Piece.createBlackBishop(0));
-		pieces.add(Piece.createBlackQueen());
-		pieces.add(Piece.createBlackKing());
-		pieces.add(Piece.createBlackBishop(1));
-		pieces.add(Piece.createBlackKnight(1));
-		pieces.add(Piece.createBlackRook(1));
+		pieces.add(Rook.createBlackRook(0));
+		pieces.add(Knight.createBlackKnight(0));
+		pieces.add(Bishop.createBlackBishop(0));
+		pieces.add(Queen.create(Color.BLACK, Position.setup(3, 7)));
+		pieces.add(King.create(Color.BLACK, Position.setup(4, 7)));
+		pieces.add(Rook.createBlackRook(1));
+		pieces.add(Knight.createBlackKnight(1));
+		pieces.add(Bishop.createBlackBishop(1));
 	}
 
 	private void addSpecialWhitePiece() {
-		pieces.add(Piece.createWhiteRook(0));
-		pieces.add(Piece.createWhiteKnight(0));
-		pieces.add(Piece.createWhiteBishop(0));
-		pieces.add(Piece.createWhiteQueen());
-		pieces.add(Piece.createWhiteKing());
-		pieces.add(Piece.createWhiteBishop(1));
-		pieces.add(Piece.createWhiteKnight(1));
-		pieces.add(Piece.createWhiteRook(1));
+		pieces.add(Rook.createWhiteRook(0));
+		pieces.add(Knight.createWhiteKnight(0));
+		pieces.add(Bishop.createWhiteBishop(0));
+		pieces.add(Queen.create(Color.WHITE, Position.setup(3, 0)));
+		pieces.add(King.create(Color.WHITE, Position.setup(4, 0)));
+		pieces.add(Bishop.createWhiteBishop(1));
+		pieces.add(Knight.createWhiteKnight(1));
+		pieces.add(Rook.createWhiteRook(1));
 	}
 
 	private void addWhitePawn(Type type) {
 		for (int i = 0; i < 8; i++) {
-			pieces.add(Piece.createWhitePawn(i));
+			pieces.add(Pawn.createWhitePawn(Position.setup(i, 1)));
 		}
 	}
 
 	private void addBlackPawn(Type type) {
 		for (int i = 0; i < 8; i++) {
-			pieces.add(Piece.createBlackPawn(i));
+			pieces.add(Pawn.createBlackPawn(Position.setup(i, 6)));
 		}
 	}
 

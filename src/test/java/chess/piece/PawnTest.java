@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
+import chess.board.Position;
 import chess.piece.Piece.Color;
 
 public class PawnTest {
@@ -17,16 +18,16 @@ public class PawnTest {
 	private void verifyPawn(Color color) {
 		Piece pawn;
 		if (color == Color.BLACK) {
-			pawn = Pawn.createBlackPawn(0);
+			pawn = Pawn.createBlackPawn(Position.create("a6"));
 		} else {
-			pawn = Pawn.createWhitePawn(0);
+			pawn = Pawn.createWhitePawn(Position.create("a2"));
 		}
 		assertEquals(color, pawn.getColor());
 	}
 
 	@Test
 	public void getPosition() {
-		Piece pawn = Pawn.createWhitePawn(4);
+		Piece pawn = Pawn.createWhitePawn(Position.create("a2"));
 		assertEquals(4, pawn.getXPosition());
 		assertEquals(1, pawn.getYPosition());
 	}

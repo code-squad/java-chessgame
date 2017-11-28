@@ -71,6 +71,7 @@ public abstract class Piece implements Moveable {
 		this.score = type.getScore();
 		this.position = position;
 		this.positions = new ArrayList<>();
+		this.position.calculatePosition(this.positions);
 	}
 
 	public Piece(Type type, Color color) {
@@ -78,58 +79,6 @@ public abstract class Piece implements Moveable {
 		this.color = color;
 		this.expression = type.getExpression(color);
 		this.score = type.getScore();
-	}
-
-	public static Piece createWhiteRook(int no) {
-		return Rook.create(Type.ROOK, Color.WHITE, no);
-	}
-
-	public static Piece createWhiteBishop(int no) {
-		return Bishop.create(Type.BISHOP, Color.WHITE, no);
-	}
-
-	public static Piece createWhiteKnight(int no) {
-		return Knight.create(Type.KNIGHT, Color.WHITE, no);
-	}
-
-	public static Piece createWhiteQueen() {
-		return Queen.create(Type.QUEEN, Color.WHITE, Position.setup(3, 0));
-	}
-
-	public static Piece createWhiteKing() {
-		return King.create(Type.KING, Color.WHITE, Position.setup(4, 0));
-	}
-
-	public static Piece createWhitePawn(int xPosition) {
-		return Pawn.create(Type.PAWN, Color.WHITE, Position.setup(xPosition, 1));
-	}
-
-	public static Piece createBlackRook(int no) {
-		return Rook.create(Type.ROOK, Color.BLACK, no);
-	}
-
-	public static Piece createBlackKnight(int no) {
-		return Knight.create(Type.KNIGHT, Color.BLACK, no);
-	}
-
-	public static Piece createBlackBishop(int no) {
-		return Bishop.create(Type.BISHOP, Color.BLACK, no);
-	}
-
-	public static Piece createBlackQueen() {
-		return Queen.create(Type.QUEEN, Color.BLACK, Position.setup(3, 7));
-	}
-
-	public static Piece createBlackKing() {
-		return King.create(Type.KING, Color.BLACK, Position.setup(4, 7));
-	}
-
-	public static Piece createBlackPawn(int xPosition) {
-		return Pawn.create(Type.PAWN, Color.BLACK, Position.setup(xPosition, 6));
-	}
-
-	public static Piece createBlank() {
-		return Blank.create(Type.BLANK, Color.NO_COLOR);
 	}
 
 	@Override
@@ -166,7 +115,6 @@ public abstract class Piece implements Moveable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((color == null) ? 0 : color.hashCode());
-		result = prime * result + ((expression == null) ? 0 : expression.hashCode());
 		result = prime * result + ((type == null) ? 0 : type.hashCode());
 		return result;
 	}
@@ -182,10 +130,6 @@ public abstract class Piece implements Moveable {
 		Piece other = (Piece) obj;
 		if (color != other.color)
 			return false;
-		if (expression == null) {
-			return other.expression == null;
-		} else if (!expression.equals(other.expression))
-			return false;
 		if (type != other.type)
 			return false;
 		return true;
@@ -193,5 +137,9 @@ public abstract class Piece implements Moveable {
 
 	public boolean isMove(Position targetPosition) {
 		return positions.contains(targetPosition);
+	}
+
+	public void calculatePosition() {
+		positions.add(position);
 	}
 }
