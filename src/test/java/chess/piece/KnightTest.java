@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import chess.board.Position;
+import chess.exception.FreezeException;
 
 public class KnightTest {
 
@@ -29,10 +30,15 @@ public class KnightTest {
 	@Test
 	public void move() throws Exception {
 		Piece knight = Knight.createWhiteKnight(0);
-		Position targetPosition = Position.create("e7");
-		knight = knight.move(targetPosition);
-		assertEquals(4, knight.getPosition().getXPosition());
-		assertEquals(6, knight.getPosition().getYPosition());
+		knight = knight.move(Position.create("c3"));
+		assertEquals(2, knight.getXPosition());
+		assertEquals(2, knight.getYPosition());
+	}
+
+	@Test(expected = FreezeException.class)
+	public void canNotGo() throws Exception {
+		Piece knight = Knight.createWhiteKnight(0);
+		knight = knight.move(Position.create("a8"));
 	}
 
 	@Test

@@ -12,6 +12,10 @@ public class Queen extends Piece {
 		return new Queen(Type.QUEEN, color, position);
 	}
 
+	public static Piece createWhiteQueen() {
+		return new Queen(Type.QUEEN, Color.WHITE, Position.create("d1"));
+	}
+
 	@Override
 	public Piece move(Position position) {
 		return new Queen(this.getType(), this.getColor(), position);

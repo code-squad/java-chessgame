@@ -3,14 +3,19 @@ package chess.piece;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import chess.board.Board;
 import chess.board.Position;
 import chess.exception.FreezeException;
 import chess.manager.Manager;
 import chess.piece.Piece.Color;
+import chess.view.ChessResultView;
 
 public class KingTest {
+
+	private static final Logger log = LoggerFactory.getLogger(KingTest.class);
 
 	@Test
 	public void getQueenPosition() {
@@ -26,17 +31,17 @@ public class KingTest {
 	@Test
 	public void move() {
 		Piece king = King.create(Color.BLACK, Position.create("e7"));
-		Position targetPosition = Position.create("e7");
+		Position targetPosition = Position.create("d6");
 		king = king.move(targetPosition);
-		assertEquals(4, king.getPosition().getXPosition());
-		assertEquals(6, king.getPosition().getYPosition());
+		assertEquals(3, king.getPosition().getXPosition());
+		assertEquals(5, king.getPosition().getYPosition());
 
 	}
 
 	@Test(expected = FreezeException.class)
 	public void moveException_1() {
-		Piece king = King.create(Color.BLACK, Position.create("e7"));
-		Position targetPosition = Position.create("A0");
+		Piece king = King.create(Color.BLACK, Position.create("e8"));
+		Position targetPosition = Position.create("e9");
 		king.move(targetPosition);
 	}
 
@@ -54,18 +59,16 @@ public class KingTest {
 		king.move(targetPosition);
 	}
 
-	@Test(expected = FreezeException.class)
+	@Test
 	public void testName() {
 		Board board = new Board();
 		board.emptyBoard();
 		Manager manager = new Manager();
 		manager.addPiece(board, Position.create("e8"), King.create(Color.BLACK, Position.create("e7")));
-		manager.addPiece(board, Position.create("e7"), Pawn.createBlackPawn(Position.create("e7")));
+		manager.addPiece(board, Position.create("e7"), Pawn.createWhitePawn(Position.create("e7")));
 		board.move(Position.create("e8"), Position.create("e7"));
+		ChessResultView result = board.result();
+		log.debug(result.show());
 	}
-	// @Test
-	// public void isMove_1() throws Exception {
-	// Piece king = King.create(Color.WHITE, Position.create("e1"));
-	// assertTrue(king.isMove(Position.create("d1")));
-	// }
+
 }

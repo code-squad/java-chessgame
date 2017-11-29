@@ -19,11 +19,14 @@ public class ChessResultView {
 		List<Rank> ranks = board.getRanks();
 		for (int i = ranks.size() - 1; i >= 0; i--) {
 			List<Piece> pieces = ranks.get(i).getPieces();
+			sb.append(i + 1);
+			sb.append(" ");
 			for (int j = 0; j < 8; j++) {
 				sb.append(pieces.get(j).toString());
 			}
 			sb.append("\n");
 		}
+		sb.append("  abcdefgh");
 		return sb.toString();
 	}
 }

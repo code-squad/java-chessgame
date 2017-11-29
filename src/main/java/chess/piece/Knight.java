@@ -1,6 +1,8 @@
 package chess.piece;
 
 import chess.board.Position;
+import chess.exception.FreezeException;
+import chess.manager.Route.KnightRoute;
 
 public class Knight extends Piece {
 
@@ -10,7 +12,13 @@ public class Knight extends Piece {
 
 	@Override
 	public Piece move(Position position) {
-		return new Knight(this.getType(), this.getColor(), position);
+		KnightRoute[] kinghtRoute = KnightRoute.values();
+		for (KnightRoute index : kinghtRoute) {
+			if ((index.getxPosition() == this.getXPosition() - position.getXPosition())
+					&& (index.getyPosition() == this.getYPosition() - position.getYPosition()))
+				return new Knight(this.getType(), this.getColor(), position);
+		}
+		throw new FreezeException("해당위치로 움직일 수 없습니다.");
 	}
 
 	public static Piece createBlackKnight(int no) {
