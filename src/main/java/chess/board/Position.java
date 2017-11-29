@@ -9,17 +9,23 @@ public class Position {
 	private int xPosition, yPosition;
 
 	private Position(int xPosition, int yPosition) {
+		if (xPosition < 0 | xPosition > 7) {
+			throw new FreezeException("x의 값은 a~h사이의 값을 입력해주세요");
+		}
 		this.xPosition = xPosition;
+		if (yPosition < 0 | yPosition > 7) {
+			throw new FreezeException("y의 값은 1~8사이의 값을 입력해주세요");
+		}
 		this.yPosition = yPosition;
 	}
 
 	private Position(String position) {
 		xPosition = position.charAt(0) - 'a';
-		if (xPosition < -1 | xPosition > 7) {
+		if (xPosition < 0 | xPosition > 7) {
 			throw new FreezeException("x의 값은 a~h사이의 값을 입력해주세요");
 		}
 		yPosition = Character.getNumericValue(position.charAt(1)) - 1;
-		if (yPosition < -1 | yPosition > 7) {
+		if (yPosition < 0 | yPosition > 7) {
 			throw new FreezeException("y의 값은 1~8사이의 값을 입력해주세요");
 		}
 	}

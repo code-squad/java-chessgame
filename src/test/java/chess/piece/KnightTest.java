@@ -41,11 +41,11 @@ public class KnightTest {
 		knight = knight.move(Position.create("a8"));
 	}
 
-	@Test
-	public void isMove() throws Exception {
-		Piece knight = Knight.createBlackKnight(1);
-		Position targetPosition = Position.create("e7");
-		knight.calculatePosition();
-		assertTrue(knight.isMove(targetPosition));
-	}
+	// @Test
+	// public void isMove() throws Exception {
+	// Piece knight = Knight.createBlackKnight(1);
+	// Position targetPosition = Position.create("e7");
+	// knight.calculatePosition();
+	// assertTrue(knight.isMove(targetPosition));
+	// }
 }

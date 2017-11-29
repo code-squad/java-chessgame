@@ -15,12 +15,15 @@ public class King extends Piece {
 
 	@Override
 	public Piece move(Position position) {
-		if (this.getXPosition() - position.getXPosition() > 2 | position.getXPosition() - this.getXPosition() < -1) {
-			throw new FreezeException();
+		int x = this.getXPosition() - position.getXPosition();
+		int y = this.getYPosition() - position.getYPosition();
+		if (x < -1 || x > 1) {
+			throw new FreezeException("킹이 움직일수 있는 위치 아닙니다.");
 		}
-		if (this.getYPosition() - position.getYPosition() > 2 | position.getYPosition() - this.getYPosition() < -1) {
-			throw new FreezeException();
+		if (y < -1 || y > 1) {
+			throw new FreezeException("킹이 움직일수 있는 위치 아닙니다.");
 		}
+
 		return new King(this.getType(), this.getColor(), position);
 	}
 }
