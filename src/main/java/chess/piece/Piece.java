@@ -130,9 +130,7 @@ public abstract class Piece implements Moveable {
 		Piece other = (Piece) obj;
 		if (color != other.color)
 			return false;
-		if (type != other.type)
-			return false;
-		return true;
+		return type == other.type;
 	}
 
 	public boolean isMove(Position targetPosition) {

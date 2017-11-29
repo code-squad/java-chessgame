@@ -71,9 +71,7 @@ public class Position {
 		Position other = (Position) obj;
 		if (xPosition != other.xPosition)
 			return false;
-		if (yPosition != other.yPosition)
-			return false;
-		return true;
+		return yPosition == other.yPosition;
 	}
 
 	public void calculatePosition(List<Position> positions) {

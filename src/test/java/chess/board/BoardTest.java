@@ -31,11 +31,4 @@ public class BoardTest {
 		assertEquals("........\n" + "........\n" + "........\n" + "........\n" + "........\n" + "........\n"
 				+ "........\n" + "........\n", result.show());
 	}
-
-	@Test
-	public void testName() throws Exception {
-		Board board = new Board();
-		board.create();
-		board.moveTest(Position.create("a1"), Position.create("a5"));
-	}
 }

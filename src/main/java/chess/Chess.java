@@ -10,7 +10,9 @@ import chess.view.ChessFormView;
 import chess.view.ChessResultView;
 
 public class Chess {
-
+	private static final String START = "start";
+	private static final String MOVE = "move";
+	private static final String END = "end";
 	private static final Logger log = LoggerFactory.getLogger(Chess.class);
 
 	public static void main(String[] args) {
@@ -19,13 +21,13 @@ public class Chess {
 		ChessResultView result;
 		do {
 			command = ChessFormView.inputCommand();
-			if (command.equals("start")) {
+			if (command.equals(START)) {
 				board.create();
 				result = board.result();
 				log.debug(result.show());
 			}
 			try {
-				if (command.startsWith("move")) {
+				if (command.startsWith(MOVE)) {
 					String[] move = command.split(" ");
 					board.move(Position.create(move[1]), Position.create(move[2]));
 					result = board.result();
@@ -34,6 +36,6 @@ public class Chess {
 			} catch (FreezeException | ArrayIndexOutOfBoundsException e) {
 				log.debug(e.getMessage());
 			}
-		} while (!command.equals("end"));
+		} while (!command.equals(END));
 	}
 }

@@ -18,12 +18,12 @@ public class Rank {
 
 	private List<Piece> pieces;
 
-	private Rank(Type type) {
+	private Rank() {
 		pieces = new ArrayList<>();
-		addBlank(type);
+		addBlank();
 	}
 
-	private void addBlank(Type type) {
+	private void addBlank() {
 		for (int i = 0; i < 8; i++) {
 			pieces.add(Blank.create());
 		}
@@ -32,10 +32,10 @@ public class Rank {
 	private Rank(Type type, Color color) {
 		pieces = new ArrayList<>();
 		if (Color.BLACK == color) {
-			addBlackPawn(type);
+			addBlackPawn();
 			return;
 		}
-		addWhitePawn(type);
+		addWhitePawn();
 	}
 
 	private Rank(Color color) {
@@ -69,20 +69,20 @@ public class Rank {
 		pieces.add(Rook.createWhiteRook(1));
 	}
 
-	private void addWhitePawn(Type type) {
+	private void addWhitePawn() {
 		for (int i = 0; i < 8; i++) {
 			pieces.add(Pawn.createWhitePawn(Position.setup(i, 1)));
 		}
 	}
 
-	private void addBlackPawn(Type type) {
+	private void addBlackPawn() {
 		for (int i = 0; i < 8; i++) {
 			pieces.add(Pawn.createBlackPawn(Position.setup(i, 6)));
 		}
 	}
 
 	public static Rank createBlank() {
-		return new Rank(Type.BLANK);
+		return new Rank();
 	}
 
 	public static Rank createSpecialWhitePiece() {

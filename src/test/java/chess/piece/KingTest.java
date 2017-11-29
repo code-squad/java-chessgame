@@ -69,6 +69,8 @@ public class KingTest {
 		board.move(Position.create("e8"), Position.create("e7"));
 		ChessResultView result = board.result();
 		log.debug(result.show());
+		assertEquals("8 ........\n" + "7 ....K...\n" + "6 ........\n" + "5 ........\n" + "4 ........\n" + "3 ........\n"
+				+ "2 ........\n" + "1 ........\n" + "  abcdefgh", result.show());
 	}
 
 }

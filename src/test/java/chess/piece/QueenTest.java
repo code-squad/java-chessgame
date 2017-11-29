@@ -18,6 +18,7 @@ public class QueenTest {
 	public void getQueenPosition() {
 		Piece whiteQueen = Queen.create(Color.WHITE, Position.create("d1"));
 		Piece blackQueen = Queen.create(Color.BLACK, Position.create("d7"));
+		assertEquals(3, whiteQueen.getXPosition());
 
 		log.debug("whiteQueen의 위치 : {}", whiteQueen.getPosition());
 		log.debug("blackQueen의 위치 : {}", blackQueen.getPosition());

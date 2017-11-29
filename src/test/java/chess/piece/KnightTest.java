@@ -1,7 +1,6 @@
 package chess.piece;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -20,6 +19,7 @@ public class KnightTest {
 		Piece whiteKnight1 = Knight.createWhiteKnight(1);
 		Piece blackKnight0 = Knight.createBlackKnight(0);
 		Piece blackKnight1 = Knight.createBlackKnight(1);
+		assertEquals(1, whiteKnight0.getXPosition());
 
 		log.debug("whiteKnight0의 위치 : {}", whiteKnight0.getPosition());
 		log.debug("whiteKnight1의 위치 : {}", whiteKnight1.getPosition());
