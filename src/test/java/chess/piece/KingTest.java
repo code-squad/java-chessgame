@@ -39,23 +39,9 @@ public class KingTest {
 	}
 
 	@Test(expected = FreezeException.class)
-	public void moveException_1() {
-		Piece king = King.create(Color.BLACK, Position.create("e8"));
-		Position targetPosition = Position.create("e9");
-		king.move(targetPosition);
-	}
-
-	@Test(expected = FreezeException.class)
-	public void moveException_2() {
+	public void moveException() {
 		Piece king = King.create(Color.BLACK, Position.create("e7"));
 		Position targetPosition = Position.create("h3");
-		king.move(targetPosition);
-	}
-
-	@Test(expected = FreezeException.class)
-	public void moveException_3() {
-		Piece king = King.create(Color.BLACK, Position.create("e8"));
-		Position targetPosition = Position.create("f6");
 		king.move(targetPosition);
 	}
 

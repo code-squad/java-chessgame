@@ -29,9 +29,10 @@ public class Rank {
 		}
 	}
 
-	private Rank(Type type, Color color) {
+	private Rank(Type pawn, Color color) {
 		pieces = new ArrayList<>();
 		if (Color.BLACK == color) {
+			
 			addBlackPawn();
 			return;
 		}
