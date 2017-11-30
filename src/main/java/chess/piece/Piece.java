@@ -5,7 +5,7 @@ import java.util.List;
 
 import chess.board.Position;
 
-public abstract class Piece implements Moveable {
+public abstract class Piece {
 
 	public enum Color {
 		WHITE, BLACK, NO_COLOR;
@@ -109,6 +109,8 @@ public abstract class Piece implements Moveable {
 	public Position getPosition() {
 		return position;
 	}
+
+	abstract Piece move(Position position);
 
 	@Override
 	public int hashCode() {

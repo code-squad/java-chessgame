@@ -32,7 +32,6 @@ public class Rank {
 	private Rank(Type pawn, Color color) {
 		pieces = new ArrayList<>();
 		if (Color.BLACK == color) {
-			
 			addBlackPawn();
 			return;
 		}
