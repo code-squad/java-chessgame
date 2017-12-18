@@ -1,74 +1,107 @@
 package pieces;
 
-import chess.Color;
-import chess.Name;
+import pieces.Piece.Color;
+import pieces.Piece.Type;
 
 public class Piece {
-	private final Color color;
-	private final Name name;
-
-	private Piece(Color color, Name name) {
-		this.color = color;
-		this.name = name;
+	public enum Color {
+		WHITE, BLACK, NOCOLOR;
 	}
+	
+	public enum Type {
+		PAWN('P'), KNIGHT('N'), ROOK('R'), BISHOP('B'), QUEEN('Q'), KING('K'), NO_PIECE('.');
+		
+		private char representation;
+		
+		private Type(char representation) {
+			this.representation = representation;
+		}
+		
+		public char getWhiteRepresentation() {
+			return Character.toLowerCase(representation);
+		}
+		
+		public char getBlackRepresentation() {
+			return representation;
+		}
+	}	
+	private final Color color;
+	private final Type type;
 
+	private Piece(Color color, Type type) {
+		this.color = color;
+		this.type = type;
+	}
+	
+	private static Piece createWhite(Type type) {
+		return new Piece(Color.WHITE, type);
+	}
+	
+	private static Piece createBlack(Type type) {
+		return new Piece(Color.BLACK, type);
+	}
+	
+	public static Piece createBlank() {
+		return new Piece(Color.NOCOLOR, Type.NO_PIECE);
+	}
+	//이 메소드들 자체는 중복이 아니고, new Piece(color, type)이 중복. createWhite/Black()을 써서 중복을 없앨 수 있다.
 	public static Piece createWhitePawn() {
-		return new Piece(Color.WHITE, Name.PAWN);
+		return createWhite(Type.PAWN);
 	}
 	
 	public static Piece createBlackPawn() {
-		return new Piece(Color.BLACK, Name.PAWN);
+		return createBlack(Type.PAWN);
 	}
 	
 	public static Piece createWhiteKnight() {
-		return new Piece(Color.WHITE, Name.KNIGHT);
+		return createWhite(Type.KNIGHT);
 	}
 	
 	public static Piece createBlackKnight() {
-		return new Piece(Color.BLACK, Name.KNIGHT);
+		return createBlack(Type.KNIGHT);
 	}
 	
 	public static Piece createWhiteRook() {
-		return new Piece(Color.WHITE, Name.ROOK);
+		return createWhite(Type.ROOK);
 	}
 	
 	public static Piece createBlackRook() {
-		return new Piece(Color.BLACK, Name.ROOK);
+		return createBlack(Type.ROOK);
 	}
 	
 	public static Piece createWhiteBishop() {
-		return new Piece(Color.WHITE, Name.BISHOP);
+		return createWhite(Type.BISHOP);
 	}
 	
 	public static Piece createBlackBishop() {
-		return new Piece(Color.BLACK, Name.BISHOP);
+		return createBlack(Type.BISHOP);
 	}
 	
 	public static Piece createWhiteQueen() {
-		return new Piece(Color.WHITE, Name.QUEEN);
+		return createWhite(Type.QUEEN);
 	}
 	
 	public static Piece createBlackQueen() {
-		return new Piece(Color.BLACK, Name.QUEEN);
+		return createBlack(Type.QUEEN);
 	}
 	
 	public static Piece createWhiteKing() {
-		return new Piece(Color.WHITE, Name.KING);
+		return createWhite(Type.KING);
 	}
 	
 	public static Piece createBlackKing() {
-		return new Piece(Color.BLACK, Name.KING);
+		return createBlack(Type.KING);
 	}
-	
+
 	public Color getColor() {
 		return color;
 	}
 	
 	public char getRepresentation() {
 		if(color == Color.WHITE) {
-			return name.getWhiteRepresentation();
+			return type.getWhiteRepresentation();
 		}
-		return name.getBlackRepresentation();
+		return type.getBlackRepresentation();
 	}
 
 	public boolean isWhite() {
@@ -77,5 +110,43 @@ public class Piece {
 
 	public boolean isBlack() {
 		return color == Color.BLACK;
+	}
+
+	public Type getType() {
+		return type;
+	}
+
+	public boolean isSame(Color color, Type type) {
+		return this.equals(new Piece(color, type));
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((color == null) ? 0 : color.hashCode());
+		result = prime * result + ((type == null) ? 0 : type.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Piece other = (Piece) obj;
+		if (color != other.color)
+			return false;
+		if (type != other.type)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "Piece [color=" + color + ", type=" + type + "]";
 	}
 }
