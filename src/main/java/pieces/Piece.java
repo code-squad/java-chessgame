@@ -1,20 +1,25 @@
 package pieces;
 
-import pieces.Piece.Color;
-import pieces.Piece.Type;
-
-public class Piece {
+public class Piece implements Comparable<Piece> {
 	public enum Color {
 		WHITE, BLACK, NOCOLOR;
 	}
 	
 	public enum Type {
-		PAWN('P'), KNIGHT('N'), ROOK('R'), BISHOP('B'), QUEEN('Q'), KING('K'), NO_PIECE('.');
+		PAWN('P', 1.0),
+		KNIGHT('N', 2.5), 
+		ROOK('R', 5.0), 
+		BISHOP('B', 3.0), 
+		QUEEN('Q', 9.0), 
+		KING('K', 0.0), 
+		NO_PIECE('.', 0.0);
 		
 		private char representation;
-		
-		private Type(char representation) {
+		private double score;
+
+		private Type(char representation, double score) {
 			this.representation = representation;
+			this.score = score;
 		}
 		
 		public char getWhiteRepresentation() {
@@ -23,6 +28,10 @@ public class Piece {
 		
 		public char getBlackRepresentation() {
 			return representation;
+		}
+		
+		public double getScore() {
+			return score;
 		}
 	}	
 	private final Color color;
@@ -96,9 +105,9 @@ public class Piece {
 	public Color getColor() {
 		return color;
 	}
-	
+	//non_color 상황도 고려하도록 바꿔야 하나? -일단 black으로 가져오면 제대로 가져옴
 	public char getRepresentation() {
-		if(color == Color.WHITE) {
+		if(isWhite()) {
 			return type.getWhiteRepresentation();
 		}
 		return type.getBlackRepresentation();
@@ -115,11 +124,26 @@ public class Piece {
 	public Type getType() {
 		return type;
 	}
+	
+	public double getScore() {
+		return type.getScore();
+	}
 
 	public boolean isSame(Color color, Type type) {
 		return this.equals(new Piece(color, type));
 	}
 
+	public boolean isSameColor(Color color) {
+		return this.color == color;
+	}
+	
+	public double calculatePoint(Color color) {
+		if(isSameColor(color)) {
+			return getScore();
+		}
+		return 0.0;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -147,6 +171,13 @@ public class Piece {
 
 	@Override
 	public String toString() {
-		return "Piece [color=" + color + ", type=" + type + "]";
+		return Character.toString(getRepresentation());
+	}
+
+	@Override
+	public int compareTo(Piece p) {
+//		int compare = Double.compare(getScore(), p.getScore()); //반대로 나옴
+		int compare = Double.compare(p.getScore(), getScore());
+		return compare;
 	}
 }

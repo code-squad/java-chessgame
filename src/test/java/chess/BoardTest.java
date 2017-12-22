@@ -41,6 +41,7 @@ public class BoardTest {
 	public void countPiece() {
 		board.initialize();
 		assertEquals(8, board.countPiece(Piece.Color.BLACK, Piece.Type.PAWN));
+		assertEquals(2, board.countPiece(Piece.Color.BLACK, Piece.Type.KNIGHT));
 	}
 
 	@Test
@@ -51,5 +52,70 @@ public class BoardTest {
 		assertEquals(Piece.createWhiteRook(), board.findPiece("a1"));
 		assertEquals(Piece.createWhiteRook(), board.findPiece("h1"));
 	}
+	
+	@Test
+	public void move() throws Exception {
+		board.initializeEmpty();
+		
+		String position = "b5";
+		Piece piece = Piece.createBlackRook();
+		board.move(position, piece);
+		
+		assertEquals(piece, board.findPiece(position));
+		System.out.println(board.showBoard());
+	}
+	
+    @Test
+    public void caculcatePoint() throws Exception {
+        board.initializeEmpty();
+
+        addPiece("b8", Piece.createBlackKing());
+        addPiece("c8", Piece.createBlackRook());
+        addPiece("a7", Piece.createBlackPawn());
+        addPiece("c7", Piece.createBlackPawn());
+        addPiece("d7", Piece.createBlackBishop());
+        addPiece("b6", Piece.createBlackPawn());
+        addPiece("e6", Piece.createBlackQueen());
+
+        addPiece("f4", Piece.createWhiteKnight());
+        addPiece("g4", Piece.createWhiteQueen());
+        addPiece("f3", Piece.createWhitePawn());
+        addPiece("h3", Piece.createWhitePawn());
+        addPiece("f2", Piece.createWhitePawn());
+        addPiece("g2", Piece.createWhitePawn());
+        addPiece("e1", Piece.createWhiteRook());
+        addPiece("f1", Piece.createWhiteKing());
+
+        assertEquals(20.0, board.caculcatePoint(Piece.Color.BLACK), 0.01);
+        assertEquals(19.5, board.caculcatePoint(Piece.Color.WHITE), 0.01);
+        System.out.println(board.showBoard());
+    }
+
+    @Test
+    public void sort() throws Exception {
+    	board.initializeEmpty();
+    	
+    	addPiece("b8", Piece.createBlackKing());
+    	addPiece("c8", Piece.createBlackRook());
+    	addPiece("d7", Piece.createBlackBishop());
+    	addPiece("b6", Piece.createBlackPawn());
+    	addPiece("e6", Piece.createBlackQueen());
+    	
+    	addPiece("f4", Piece.createWhiteKnight());
+    	addPiece("g4", Piece.createWhiteQueen());
+    	addPiece("f3", Piece.createWhitePawn());
+    	addPiece("e1", Piece.createWhiteRook());
+    	addPiece("f1", Piece.createWhiteKing());
+    	
+    	assertEquals("qrnpk", board.sortAsc(Piece.Color.WHITE));
+    	assertEquals("QRBPK", board.sortAsc(Piece.Color.BLACK));
+    	assertEquals("kpnrq", board.sortDesc(Piece.Color.WHITE));
+    	assertEquals("KPBRQ", board.sortDesc(Piece.Color.BLACK));
+    	System.out.println(board.showBoard());
+    }
+
+    private void addPiece(String position, Piece piece) {
+        board.move(position, piece);
+    }
 
 }

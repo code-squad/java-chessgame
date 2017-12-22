@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pieces.Piece;
@@ -9,92 +10,23 @@ import pieces.Piece.Type;
 import utils.StringUtils;
 
 public class Board {
-	private List<Rank> ranks = new ArrayList<>();
-/*	
-	public void addWhitePawn(Piece pawn) {
-		whitePawns.add(pawn);
-	}
-	
-	public void addBlackPawn(Piece pawn) {
-		blackPawns.add(pawn);
-	}
-	
-	public void addWhitePiece(Piece piece) {
-		whitePiece.add(piece);
-	}
-	
-	public void addBlackPiece(Piece piece) {
-		blackPiece.add(piece);
-	}
-	
-	public Piece findWhitePawn(int index) {
-		return whitePawns.get(index);
-	}
+	public final static int HEIGHT = 8;
+	public final static int WIDTH = 8;
+	private List<Rank> ranks = new ArrayList<>(Board.HEIGHT);
 
-	public Piece findBlackPawn(int index) {
-		return blackPawns.get(index);
-	}
-	
-	public Piece findWhitePiece(int index) {
-		return whitePiece.get(index);
-	}
-	
-	public Piece findBlackPiece(int index) {
-		return blackPiece.get(index);
-	}
-*/	
 	public void initialize() {
-		Rank whitePawn = new Rank();
-		Rank whitePiece = new Rank();
-		Rank blackPawn = new Rank();
-		Rank blackPiece = new Rank();
-		Rank blank = new Rank();
-		
-		for(int i = 0; i < 8; i++) {
-			whitePawn.addWhitePawn(Piece.createWhitePawn());
-			blackPawn.addBlackPawn(Piece.createBlackPawn());
-			blank.addBlank(Piece.createBlank());
-		}
-		whitePiece.addWhitePiece(Piece.createWhiteRook());
-		whitePiece.addWhitePiece(Piece.createWhiteKnight());
-		whitePiece.addWhitePiece(Piece.createWhiteBishop());
-		whitePiece.addWhitePiece(Piece.createWhiteQueen());
-		whitePiece.addWhitePiece(Piece.createWhiteKing());
-		whitePiece.addWhitePiece(Piece.createWhiteBishop());
-		whitePiece.addWhitePiece(Piece.createWhiteKnight());
-		whitePiece.addWhitePiece(Piece.createWhiteRook());
-		
-		blackPiece.addBlackPiece(Piece.createBlackRook());
-		blackPiece.addBlackPiece(Piece.createBlackKnight());
-		blackPiece.addBlackPiece(Piece.createBlackBishop());
-		blackPiece.addBlackPiece(Piece.createBlackQueen());
-		blackPiece.addBlackPiece(Piece.createBlackKing());
-		blackPiece.addBlackPiece(Piece.createBlackBishop());
-		blackPiece.addBlackPiece(Piece.createBlackKnight());
-		blackPiece.addBlackPiece(Piece.createBlackRook());
+		ranks.addAll(new Rank().initialize());
+	}
 
-		ranks.add(blackPiece);
-		ranks.add(blackPawn);
-		ranks.add(blank);
-		ranks.add(blank);//이거 클론?해줘야하지 않을까?
-		
-		ranks.add(blank);
-		ranks.add(blank);
-		ranks.add(whitePawn);
-		ranks.add(whitePiece);
+	public void initializeEmpty() {
+		for (int i = 0; i < HEIGHT; i++) {
+			ranks.add(new Rank().initializeBlankRank());
+		}
 	}
-/*	
-	public String getWhitePawnsResult() {
-		return getPawnResult(whitePawns);
-	}
-	
-	public String getBlackPawnsResult() {
-		return getPawnResult(blackPawns);
-	}
-*/	
-	public String getPieceResult(List<Piece> pieces) {
+
+	private String getPieceResult(List<Piece> pieces) {
 		StringBuilder sb = new StringBuilder();
-		for(Piece piece : pieces) {
+		for (Piece piece : pieces) {
 			sb.append(piece.getRepresentation());
 		}
 		return sb.toString();
@@ -102,29 +34,69 @@ public class Board {
 
 	public String showBoard() {
 		StringBuilder sb = new StringBuilder();
-		for(Rank rank : ranks) {
+		for (Rank rank : ranks) {
 			sb.append(rank.getRankResult());
 			StringUtils.appendNewLine(sb);
 		}
 		return sb.toString();
 	}
+
 	public int countPiece(Color color, Type type) {
-		int count = 0;
-		for(Rank rank : ranks) {
-			count += rank.countPiece(color, type);
-		}
-		return count;
-	}
-	public Piece findPiece(String position) {
-		char x = position.charAt(0);
-		int xPos = x - 'a'; //a면 0, b면 1
-		char y = position.charAt(1);
-		int yPos = Character.getNumericValue(y);
-		//위치 xPos, 8 - yPos 
-		return ranks.get(8 - yPos).findPiece(xPos);
+		return ranks.stream().mapToInt(rank -> rank.countPiece(color, type)).sum();
 	}
 
-/*	public int pieceCount() {
-		return whitePawns.size() +whitePiece.size() + blackPawns.size() + blackPiece.size();
-	}*/
+	public Piece findPiece(String position) {
+		return getRankByPos(position).findPiece(Position.getXPos(position));
+	}
+
+	public void move(String position, Piece piece) {
+		getRankByPos(position).set(Position.getXPos(position), piece);
+	}
+
+	private Rank getRankByPos(String position) {
+		return ranks.get(Position.getYPos(position));
+	}
+
+	public double caculcatePoint(Color color) {
+		List<Integer> pawnsXPos = new ArrayList<>();
+		double score = 0.0;
+		for (Rank rank : ranks) {
+			score += rank.calculatePoint(color);
+			pawnsXPos.addAll(rank.findAllPawnsXPos(color));
+		}
+		Collections.sort(pawnsXPos);
+		return score - (0.5 * countDuplicatedPawn(pawnsXPos));
+	}
+	
+	private int countDuplicatedPawn(List<Integer> pawnsXPos) {
+		int duplicatedCount = pawnsXPos.size();
+		for (int x : pawnsXPos) {
+			if (pawnsXPos.indexOf(x) == pawnsXPos.lastIndexOf(x)) {
+				duplicatedCount--;
+			}
+		}
+		return duplicatedCount;
+	}
+
+	private List<Piece> getSurvivedPiece(Color color) {
+		List<Piece> survivedPieces = new ArrayList<>();
+		for(Rank rank : ranks) {
+			survivedPieces.addAll(rank.getSurvivedPiece(color));
+		}
+		return survivedPieces;
+	}
+	
+	public String sortAsc(Color color) {
+		List<Piece> survivedPieces = getSurvivedPiece(color);
+		Collections.sort(survivedPieces);
+		return getPieceResult(survivedPieces); 
+	}
+	
+	public String sortDesc(Color color) {
+		List<Piece> survivedPieces = getSurvivedPiece(color);
+		Collections.sort(survivedPieces, Collections.reverseOrder());
+		//Collections.sort(survivedPieces); //sort 안 하고 reverse만 하면 리스트에 있는 순서를 바꿔줌
+		//Collections.reverse(survivedPieces);
+		return getPieceResult(survivedPieces);
+	}
 }
