@@ -45,20 +45,20 @@ public class BoardTest {
 		assertEquals(Piece.createWhiteKing(), board.findPiece("e1"));
 	}
 	
-	@Test
-	public void showBoard() {
-		System.out.println(board.showBoard());
-	}
-
 //	@Test
-//    public void move() throws Exception {
-//        board.initializeEmpty();
-//
-//        String position = "b5";
-//        Piece piece = Piece.createBlackRook();
-//        board.move(position, piece);
-//
-//        assertEquals(piece, board.findPiece(position));
-//        System.out.println(board.showBoard());
-//    }
+//	public void showBoard() {
+//		System.out.println(board.showBoard());
+//	}
+
+	@Test
+    public void move() throws Exception {
+        board.initializeEmpty();
+
+        String position = "b5";
+        Piece piece = Piece.createBlackRook();
+        board.move(position, piece);
+
+        assertEquals(piece, board.findPiece(position));
+        System.out.println(board.showBoard());
+    }
 }

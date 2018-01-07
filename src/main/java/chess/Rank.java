@@ -75,8 +75,7 @@ public class Rank {
         return rank;
 	}
 	
-	public Rank setPiece(Position position, Piece piece) {
+	public void setPiece(Position position, Piece piece) {
 		pieces.set(position.getX(), piece);
-		return this;
 	}
 }

@@ -62,7 +62,11 @@ public class Board {
 		return piece;
 	}
 	
-//	Piece move(Position position, Piece piece) {
-//		
-//	}
+	public void move(String position, Piece piece) {
+		move(new Position(position), piece);
+	}
+	
+	public void move(Position position, Piece piece) {
+		ranks.get(position.getY()).setPiece(position, piece);
+	}
 }
