@@ -22,8 +22,6 @@ public class Position {
 		char x = position.charAt(0);
 		return x + "";
 	}
-	
-	
 
 	@Override
 	public int hashCode() {
@@ -54,6 +52,10 @@ public class Position {
 	public String toString() {
 		return "Position [position=" + position + "]";
 	}
+	
+	
+
+	
 
 	
 }

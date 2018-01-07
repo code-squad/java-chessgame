@@ -69,4 +69,12 @@ public class Board {
 	public void move(Position position, Piece piece) {
 		ranks.get(position.getY()).setPiece(position, piece);
 	}
+
+	public double calculcatePoint(Color color) {
+		double point = 0;
+		for (Rank rank : ranks) {
+			point += rank.calculatePoint(color);
+		}
+		return point;
+	}
 }

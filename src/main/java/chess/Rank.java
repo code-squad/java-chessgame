@@ -78,4 +78,14 @@ public class Rank {
 	public void setPiece(Position position, Piece piece) {
 		pieces.set(position.getX(), piece);
 	}
+
+	public double calculatePoint(Color color) {
+		double point = 0;
+		for (Piece piece : pieces) {
+			if (piece.getColor() == color) {
+				point += piece.getType().getDefaultPoint();
+			}
+		}
+		return point;
+	}
 }
