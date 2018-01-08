@@ -12,12 +12,12 @@ public class characterTest {
 		assertEquals(true, Character.isWhitespace('\n'));
 		assertEquals(false, Character.isWhitespace('k'));
 	}
-	
+
 	@Test
-    public void testName() throws Exception {
-        assertFalse(Character.isJavaIdentifierStart('^'));
-        assertFalse(Character.isJavaIdentifierStart('*'));
-        assertTrue(Character.isJavaIdentifierStart('a'));
-        assertTrue(Character.isJavaIdentifierStart('A'));
-    }
+	public void testName() throws Exception {
+		assertFalse(Character.isJavaIdentifierStart('^'));
+		assertFalse(Character.isJavaIdentifierStart('*'));
+		assertTrue(Character.isJavaIdentifierStart('a'));
+		assertTrue(Character.isJavaIdentifierStart('A'));
+	}
 }

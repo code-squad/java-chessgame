@@ -11,9 +11,8 @@ import pieces.Piece.Type;
 import pieces.Position;
 
 public class Board {
-	
-	List<Rank> ranks = new ArrayList<Rank>();
-	
+	private List<Rank> ranks = new ArrayList<Rank>();
+
 	int getMatchCountsOfPiece(Color color, Type type) {
 		int matchCountsOfPiece = 0;
 		for (Rank rank : ranks) {
@@ -24,15 +23,15 @@ public class Board {
 
 	public void initialize() {
 		ranks.add(Rank.initializeBlackPieces());
-        ranks.add(Rank.initializeBlackPawns());
-        ranks.add(Rank.initializeBlank());
-        ranks.add(Rank.initializeBlank());
-        ranks.add(Rank.initializeBlank());
-        ranks.add(Rank.initializeBlank());
-        ranks.add(Rank.initializeWhitePawns());
-        ranks.add(Rank.initializeWhitePieces());
-    }
-	
+		ranks.add(Rank.initializeBlackPawns());
+		ranks.add(Rank.initializeBlank());
+		ranks.add(Rank.initializeBlank());
+		ranks.add(Rank.initializeBlank());
+		ranks.add(Rank.initializeBlank());
+		ranks.add(Rank.initializeWhitePawns());
+		ranks.add(Rank.initializeWhitePieces());
+	}
+
 	public void initializeEmpty() {
 		for (int i = 0; i < 8; i++) {
 			ranks.add(Rank.initializeBlank());
@@ -46,7 +45,7 @@ public class Board {
 		}
 		return appendNewLine(eachRank.toString());
 	}
-	
+
 	String showBoard() {
 		StringBuilder board = new StringBuilder();
 		for (Rank rank : ranks) {
@@ -61,11 +60,11 @@ public class Board {
 		Piece piece = rank.getPieces().get(position.getX());
 		return piece;
 	}
-	
+
 	public void move(String position, Piece piece) {
 		move(new Position(position), piece);
 	}
-	
+
 	public void move(Position position, Piece piece) {
 		ranks.get(position.getY()).setPiece(position, piece);
 	}

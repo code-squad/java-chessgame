@@ -50,6 +50,10 @@ public class Piece {
 	public Type getType() {
 		return type;
 	}
+	
+	public double getDefaultPoint() {
+		return type.defaultPoint;
+	}
 
 	public char getRepresentation() {
 		if (this.isWhite()) {

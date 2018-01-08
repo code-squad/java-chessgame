@@ -1,26 +1,26 @@
 package pieces;
 
 public class Position {
-	
 	private String position;
-	
-	public Position(String position) {
+
+	public Position(String position) throws InputException {
 		this.position = position;
+		if (getX() < 0 || getX() > 7) {
+			throw new InputException("a ~ h 사이의 문자를 입력해주세요");
+		}
+		if (getY() < 0 || getY() > 7) {
+			throw new InputException("1 ~ 8 사이의 숫자를 입력해주세요");
+		}
 	}
-	
+
 	public int getX() {
 		char x = position.charAt(0);
 		return x - 'a';
 	}
-	
+
 	public int getY() {
 		char y = position.charAt(1);
 		return 8 - Character.getNumericValue(y);
-	}
-	
-	public static String changeCharToString(String position) {
-		char x = position.charAt(0);
-		return x + "";
 	}
 
 	@Override
