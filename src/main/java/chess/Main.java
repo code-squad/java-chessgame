@@ -2,17 +2,25 @@ package chess;
 
 import java.util.Scanner;
 
+import View.ChessView;
+
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
+		Board board = new Board();
+		ChessView chessView = new ChessView(board);
+		ChessGame chessGame = new ChessGame(board);
 
 		while (true) {
 			System.out.print("start or end ? : ");
 			String input = sc.nextLine();
 			if (input.equals("start")) {
-				Board board = new Board();
 				board.initialize();
-				System.out.println(board.showBoard());
+				System.out.println(chessView.showBoard());
+			} else if (input.startsWith("move")) {
+				String[] position = input.split(" ");
+				chessGame.move(position[1], position[2]);
+				System.out.println(chessView.showBoard());
 			} else if (input.equals("end")) {
 				break;
 			} else {

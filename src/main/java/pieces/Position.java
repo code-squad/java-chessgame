@@ -2,15 +2,10 @@ package pieces;
 
 public class Position {
 	private String position;
+	
 
-	public Position(String position) throws InputException {
+	public Position(String position){
 		this.position = position;
-		if (getX() < 0 || getX() > 7) {
-			throw new InputException("a ~ h 사이의 문자를 입력해주세요");
-		}
-		if (getY() < 0 || getY() > 7) {
-			throw new InputException("1 ~ 8 사이의 숫자를 입력해주세요");
-		}
 	}
 
 	public int getX() {

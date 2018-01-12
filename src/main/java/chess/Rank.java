@@ -3,15 +3,22 @@ package chess;
 import java.util.ArrayList;
 import java.util.List;
 
+import pieces.Bishop;
+import pieces.Blank;
+import pieces.King;
+import pieces.Knight;
+import pieces.Pawn;
 import pieces.Piece;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
 import pieces.Position;
+import pieces.Queen;
+import pieces.Rook;
 
 public class Rank {
 	private List<Piece> pieces = new ArrayList<>();
 
-	List<Piece> getPieces() {
+	public List<Piece> getPieces() {
 		return this.pieces;
 	}
 
@@ -24,53 +31,55 @@ public class Rank {
 		}
 		return countsOfPiece;
 	}
-
-	static Rank initializeWhitePieces() {
+	
+	static Rank initializeBlackPieces(int column) {
 		Rank rank = new Rank();
-		rank.pieces.add(Piece.createWhiteRook());
-		rank.pieces.add(Piece.createWhiteKnight());
-		rank.pieces.add(Piece.createWhiteBishop());
-		rank.pieces.add(Piece.createWhiteQueen());
-		rank.pieces.add(Piece.createWhiteKing());
-		rank.pieces.add(Piece.createWhiteBishop());
-		rank.pieces.add(Piece.createWhiteKnight());
-		rank.pieces.add(Piece.createWhiteRook());
+		rank.pieces.add(Rook.createBlack(new Position("a" + column)));
+		rank.pieces.add(Knight.createBlack(new Position("b" + column)));
+		rank.pieces.add(Bishop.createBlack(new Position("c" + column)));
+		rank.pieces.add(King.createBlack(new Position("d" + column)));
+		rank.pieces.add(Queen.createBlack(new Position("e" + column)));
+		rank.pieces.add(Bishop.createBlack(new Position("f" + column)));
+		rank.pieces.add(Knight.createBlack(new Position("g" + column)));
+		rank.pieces.add(Rook.createBlack(new Position("h" + column)));
 		return rank;
 	}
 
-	static Rank initializeBlackPieces() {
+	static Rank initializeWhitePieces(int column) {
 		Rank rank = new Rank();
-		rank.pieces.add(Piece.createBlackRook());
-		rank.pieces.add(Piece.createBlackKnight());
-		rank.pieces.add(Piece.createBlackBishop());
-		rank.pieces.add(Piece.createBlackQueen());
-		rank.pieces.add(Piece.createBlackKing());
-		rank.pieces.add(Piece.createBlackBishop());
-		rank.pieces.add(Piece.createBlackKnight());
-		rank.pieces.add(Piece.createBlackRook());
+		rank.pieces.add(Rook.createWhite(new Position("a" + column)));
+		rank.pieces.add(Knight.createWhite(new Position("b" + column)));
+		rank.pieces.add(Bishop.createWhite(new Position("c" + column)));
+		rank.pieces.add(King.createWhite(new Position("d" + column)));
+		rank.pieces.add(Queen.createWhite(new Position("e" + column)));
+		rank.pieces.add(Bishop.createWhite(new Position("f" + column)));
+		rank.pieces.add(Knight.createWhite(new Position("g" + column)));
+		rank.pieces.add(Rook.createWhite(new Position("h" + column)));
 		return rank;
 	}
-
-	static Rank initializeWhitePawns() {
+	
+	static Rank initializeBlackPawns(int column) {
 		Rank rank = new Rank();
 		for (int i = 0; i < 8; i++) {
-			rank.pieces.add(Piece.createWhitePawn());
+			System.out.println((char)('a' + i) + "" + column);
+			rank.pieces.add(Pawn.createBlack(new Position((char)('a' + i) + "" + column)));
+		}
+		return rank;
+	}
+	
+	static Rank initializeWhitePawns(int column) {
+		Rank rank = new Rank();
+		for (int i = 0; i < 8; i++) {
+			System.out.println((char)('a' + i) + "" + column);
+			rank.pieces.add(Pawn.createWhite(new Position((char)('a' + i) + "" + column)));
 		}
 		return rank;
 	}
 
-	static Rank initializeBlackPawns() {
+	public static Rank initializeBlank(int column) {
 		Rank rank = new Rank();
 		for (int i = 0; i < 8; i++) {
-			rank.pieces.add(Piece.createBlackPawn());
-		}
-		return rank;
-	}
-
-	public static Rank initializeBlank() {
-		Rank rank = new Rank();
-		for (int i = 0; i < 8; i++) {
-			rank.pieces.add(Piece.createBlank());
+			rank.pieces.add(Blank.createBlank(new Position((char)('a' + i) + "" + column)));
 		}
 		return rank;
 	}

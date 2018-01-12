@@ -1,5 +1,7 @@
 package pieces;
 
+import java.util.List;
+
 public class Piece {
 	public enum Color {
 		WHITE, BLACK, NO_COLOR;
@@ -37,10 +39,14 @@ public class Piece {
 
 	private Color color;
 	private Type type;
+	private Position position;
+	private List<Direction> directions;
 
-	public Piece(Color color, Type type) {
+	public Piece(Color color, Type type, Position position, List<Direction> directions) {
 		this.color = color;
 		this.type = type;
+		this.position = position;
+		this.directions = directions;
 	}
 
 	public Color getColor() {
@@ -49,6 +55,18 @@ public class Piece {
 
 	public Type getType() {
 		return type;
+	}
+	
+	public Position getPosition() {
+		return position;
+	}
+	
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+	
+	public List<Direction> getDirections() {
+		return directions;
 	}
 	
 	public double getDefaultPoint() {
@@ -74,72 +92,33 @@ public class Piece {
 		return matchColor(color) && matchType(type);
 	}
 
-	public static Piece createWhite(Type type) {
-		return new Piece(Color.WHITE, type);
-	}
-
-	public static Piece createBlack(Type type) {
-		return new Piece(Color.BLACK, type);
-	}
-
-	public static Piece createWhitePawn() {
-		return createWhite(Type.PAWN);
-	}
-
-	public static Piece createBlackPawn() {
-		return createBlack(Type.PAWN);
-	}
-
-	public static Piece createWhiteKnight() {
-		return createWhite(Type.KNIGHT);
-	}
-
-	public static Piece createBlackKnight() {
-		return createBlack(Type.KNIGHT);
-	}
-
-	public static Piece createWhiteRook() {
-		return createWhite(Type.ROOK);
-	}
-
-	public static Piece createBlackRook() {
-		return createBlack(Type.ROOK);
-	}
-
-	public static Piece createWhiteBishop() {
-		return createWhite(Type.BISHOP);
-	}
-
-	public static Piece createBlackBishop() {
-		return createBlack(Type.BISHOP);
-	}
-
-	public static Piece createWhiteQueen() {
-		return createWhite(Type.QUEEN);
-	}
-
-	public static Piece createBlackQueen() {
-		return createBlack(Type.QUEEN);
-	}
-
-	public static Piece createWhiteKing() {
-		return createWhite(Type.KING);
-	}
-
-	public static Piece createBlackKing() {
-		return createBlack(Type.KING);
-	}
-
-	public static Piece createBlank() {
-		return new Piece(Color.NO_COLOR, Type.NO_PIECE);
-	}
-
 	public boolean isBlack() {
 		return this.color == Color.BLACK;
 	}
 
 	public boolean isWhite() {
 		return this.color == Color.WHITE;
+	}
+	
+	public void checkTargetPosition(Piece target) {
+		if (isSameColor(target)) {
+			throw new InputException("이동이 불가능합니다!!!");
+		}
+	}
+	
+	public boolean isSameColor(Piece target) {
+		if (this.color == target.color) {
+			return true;
+		}
+		return false;
+ 	}
+	
+	public int getDiffX(Piece target) {
+		return target.position.getX() - position.getX();
+	}
+	
+	public int getDiffY(Piece target) {
+		return target.position.getY() - position.getY();
 	}
 
 	@Override

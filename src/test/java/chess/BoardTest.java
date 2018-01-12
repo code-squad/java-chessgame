@@ -5,9 +5,14 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
+import View.ChessView;
+import pieces.King;
+import pieces.Pawn;
 import pieces.Piece;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
+import pieces.Queen;
+import pieces.Rook;
 
 public class BoardTest {
 	private Board board;
@@ -29,52 +34,28 @@ public class BoardTest {
 	}
 
 	@Test
-	public void findPiece() throws Exception {
-		board.initialize();
-		assertEquals(Piece.createBlackRook(), board.findPiece("a8"));
-		assertEquals(Piece.createBlackKnight(), board.findPiece("g8"));
-		assertEquals(Piece.createWhiteBishop(), board.findPiece("c1"));
-		assertEquals(Piece.createWhiteKing(), board.findPiece("e1"));
-	}
-
-	@Test
-	public void showBoard() {
-		System.out.println(board.showBoard());
-	}
-
-	@Test
-	public void move() throws Exception {
-		board.initializeEmpty();
-
-		String position = "c6";
-		Piece piece = Piece.createBlackRook();
-		board.move(position, piece);
-
-		assertEquals(piece, board.findPiece(position));
-		System.out.println(board.showBoard());
-	}
-
-	@Test
 	public void calculcatePoint() throws Exception {
 		board.initializeEmpty();
 
-		addPiece("b6", Piece.createBlackPawn());
-		addPiece("e6", Piece.createBlackQueen());
-		addPiece("b8", Piece.createBlackKing());
-		addPiece("c8", Piece.createBlackRook());
+		addPiece("b6", Pawn.createBlack(null));
+		addPiece("e6", Queen.createBlack(null));
+		addPiece("b8", King.createBlack(null));
+		addPiece("c8", Rook.createBlack(null));
 
-		addPiece("f2", Piece.createWhitePawn());
-		addPiece("g2", Piece.createWhitePawn());
-		addPiece("e1", Piece.createWhiteRook());
-		addPiece("f1", Piece.createWhiteKing());
+		addPiece("f2", Pawn.createWhite(null));
+		addPiece("g2", Pawn.createWhite(null));
+		addPiece("e1", Rook.createWhite(null));
+		addPiece("f1", King.createWhite(null));
 
 		assertEquals(15.0, board.calculcatePoint(Color.BLACK), 0.01);
 		assertEquals(7.0, board.calculcatePoint(Color.WHITE), 0.01);
 
-		System.out.println(board.showBoard());
+		ChessView view = new ChessView(board);
+		System.out.println(view.showBoard());
 	}
 
 	private void addPiece(String position, Piece piece) {
-		board.move(position, piece);
+		ChessGame game = new ChessGame(board);
+		game.move(position, piece);
 	}
 }
