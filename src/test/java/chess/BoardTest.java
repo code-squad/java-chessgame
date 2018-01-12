@@ -5,12 +5,12 @@ import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import View.ChessView;
 import pieces.King;
 import pieces.Pawn;
 import pieces.Piece;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
+import pieces.Position;
 import pieces.Queen;
 import pieces.Rook;
 
@@ -35,7 +35,8 @@ public class BoardTest {
 
 	@Test
 	public void calculcatePoint() throws Exception {
-		board.initializeEmpty();
+		BoardForTest boardForTest = new BoardForTest();
+		boardForTest.initialize();
 
 		addPiece("b6", Pawn.createBlack(null));
 		addPiece("e6", Queen.createBlack(null));
@@ -47,15 +48,12 @@ public class BoardTest {
 		addPiece("e1", Rook.createWhite(null));
 		addPiece("f1", King.createWhite(null));
 
-		assertEquals(15.0, board.calculcatePoint(Color.BLACK), 0.01);
-		assertEquals(7.0, board.calculcatePoint(Color.WHITE), 0.01);
-
-		ChessView view = new ChessView(board);
-		System.out.println(view.showBoard());
+		assertEquals(15.0, boardForTest.calculcatePoint(Color.BLACK), 0.01);
+		assertEquals(7.0, boardForTest.calculcatePoint(Color.WHITE), 0.01);
 	}
 
 	private void addPiece(String position, Piece piece) {
 		ChessGame game = new ChessGame(board);
-		game.move(position, piece);
+		game.move(new Position(position), piece);
 	}
 }

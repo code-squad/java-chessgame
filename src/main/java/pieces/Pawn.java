@@ -21,7 +21,6 @@ public class Pawn extends Piece {
 		if (isSameColor(target)) {
 			throw new InputException("이동이 불가능합니다!#!");
 		}
-		System.out.println("diffY : " + getDiffY(target) + " diffX : " + getDiffX(target) * (-1));
 		for (Direction direction : getDirections()) {
 			if (getDiffX(target) == direction.getXDegree() &&
 					getDiffY(target) * (-1) == direction.getYDegree()) {

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import pieces.King;
 import pieces.Knight;
 import pieces.Pawn;
 import pieces.Position;
@@ -41,8 +42,8 @@ public class ChessGameTest {
 		Board board = new Board();
 		board.initialize();
 		ChessGame game = new ChessGame(board);
-		Position pawnPosition = new Position("b1");
-		Knight whiteKnight = Knight.createWhite(pawnPosition);
+		Position kingPosition = new Position("b1");
+		Knight whiteKnight = Knight.createWhite(kingPosition);
 		game.move("b1", "c3");
 		assertEquals(whiteKnight, game.findPiece("c3"));
 	}
@@ -56,6 +57,21 @@ public class ChessGameTest {
 		Queen whiteQueen = Queen.createWhite(pawnPosition);
 		game.move("e1", "e4");
 		assertEquals(whiteQueen, game.findPiece("e4"));
+	}
+	
+	@Test
+	public void moveKingTest() {
+		Board board = new Board();
+		board.initialize();
+		ChessGame game = new ChessGame(board);
+		Position pawnPosition = new Position("d3");
+		Pawn whitePawn = Pawn.createWhite(pawnPosition);
+		Position kingPosition = new Position("d2");
+		King whiteKing = King.createWhite(kingPosition);
+		game.move("d2", "d3");
+		game.move("d1", "d2");
+		assertEquals(whitePawn, game.findPiece("d3"));
+		assertEquals(whiteKing, game.findPiece("d2"));
 	}
 	
 	@Test

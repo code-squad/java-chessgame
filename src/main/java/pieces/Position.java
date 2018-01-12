@@ -12,6 +12,10 @@ public class Position {
 		char x = position.charAt(0);
 		return x - 'a';
 	}
+	
+	public String getPosition() {
+		return this.position;
+	}
 
 	public int getY() {
 		char y = position.charAt(1);

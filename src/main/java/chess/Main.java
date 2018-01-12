@@ -2,9 +2,14 @@ package chess;
 
 import java.util.Scanner;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import View.ChessView;
 
 public class Main {
+	private static final Logger log = LoggerFactory.getLogger(Main.class);
+	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		Board board = new Board();
@@ -16,15 +21,15 @@ public class Main {
 			String input = sc.nextLine();
 			if (input.equals("start")) {
 				board.initialize();
-				System.out.println(chessView.showBoard());
+				log.info(chessView.showBoard());
 			} else if (input.startsWith("move")) {
 				String[] position = input.split(" ");
 				chessGame.move(position[1], position[2]);
-				System.out.println(chessView.showBoard());
+				log.info(chessView.showBoard());
 			} else if (input.equals("end")) {
 				break;
 			} else {
-				System.out.println("다시 입력해주세요");
+				log.info("다시 입력해주세요");
 			}
 		}
 

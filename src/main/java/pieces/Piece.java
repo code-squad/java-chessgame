@@ -113,6 +113,13 @@ public class Piece {
 		return false;
  	}
 	
+	public void move(Piece target, Piece blank) {
+//		Position sourcePosition = getPosition();
+		setPosition(target.getPosition());
+//		target.setPosition(sourcePosition);
+//		blank.setPosition(sourcePosition);
+	}
+	
 	public int getDiffX(Piece target) {
 		return target.position.getX() - position.getX();
 	}

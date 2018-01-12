@@ -61,7 +61,6 @@ public class Rank {
 	static Rank initializeBlackPawns(int column) {
 		Rank rank = new Rank();
 		for (int i = 0; i < 8; i++) {
-			System.out.println((char)('a' + i) + "" + column);
 			rank.pieces.add(Pawn.createBlack(new Position((char)('a' + i) + "" + column)));
 		}
 		return rank;
@@ -70,7 +69,6 @@ public class Rank {
 	static Rank initializeWhitePawns(int column) {
 		Rank rank = new Rank();
 		for (int i = 0; i < 8; i++) {
-			System.out.println((char)('a' + i) + "" + column);
 			rank.pieces.add(Pawn.createWhite(new Position((char)('a' + i) + "" + column)));
 		}
 		return rank;

@@ -4,6 +4,7 @@ import static utils.StringUtils.appendNewLine;
 
 import java.util.List;
 
+
 import chess.Board;
 import chess.Rank;
 import pieces.Piece;

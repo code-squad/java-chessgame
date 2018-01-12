@@ -6,7 +6,7 @@ import java.util.List;
 import pieces.Piece.Color;
 import pieces.Piece.Type;
 
-public class Board {
+public class Board implements Initialize {
 	private List<Rank> ranks = new ArrayList<Rank>();
 	
 	public List<Rank> getRanks() {
@@ -21,6 +21,7 @@ public class Board {
 		return matchCountsOfPiece;
 	}
 
+	@Override
 	public void initialize() {
 		ranks.add(Rank.initializeBlackPieces(8));
 		ranks.add(Rank.initializeBlackPawns(7));
@@ -30,12 +31,6 @@ public class Board {
 		ranks.add(Rank.initializeBlank(3));
 		ranks.add(Rank.initializeWhitePawns(2));
 		ranks.add(Rank.initializeWhitePieces(1));
-	}
-
-	public void initializeEmpty() {
-		for (int i = 0; i < 8; i++) {
-			ranks.add(Rank.initializeBlank(8 - i));
-		}
 	}
 	
 	public double calculcatePoint(Color color) {

@@ -13,34 +13,26 @@ public class ChessGame {
 		this.ranks = board.getRanks();
 	}
 	
-	public Piece findPiece(String str) {
-		Position position = new Position(str);
+	public Piece findPiece(String spot) {
+		Position position = new Position(spot);
 		Rank rank = ranks.get(position.getY());
 		Piece piece = rank.getPieces().get(position.getX());
 		return piece;
 	}
 
-	public void move(String position, Piece piece) {
-		move(new Position(position), piece);
-	}
-
-	public void move(Position position, Piece piece) {
-		ranks.get(position.getY()).setPiece(position, piece);
+	public void move(Position targetP, Piece piece) {
+		Position sourceP = piece.getPosition();
+		piece.setPosition(targetP);
+		ranks.get(targetP.getY()).setPiece(targetP, piece);
+		Piece blank = Blank.createBlank(sourceP);
+		ranks.get(sourceP.getY()).setPiece(sourceP, blank);
 	}
 	
 	public void move(String sourcePosition, String targetPosition) {
+		Position targetP = new Position(targetPosition);
 		Piece source = findPiece(sourcePosition);
 		Piece target = findPiece(targetPosition);
-		Piece blank = Blank.createBlank(new Position(targetPosition));
 		source.checkTargetPosition(target);
-		source.setPosition(new Position(targetPosition));
-		target.setPosition(new Position(sourcePosition));
-		if (source.getColor() != target.getColor()) {
-			move(targetPosition, source);
-			move(sourcePosition, blank);
-			return;
-		}
-		move(targetPosition, source);
-		move(sourcePosition, target);
+		move(targetP, source);
 	}
 }
