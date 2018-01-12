@@ -9,8 +9,8 @@ import pieces.Piece.Type;
 public class UpperBoard {
 	private List<Rank> ranks = new ArrayList<Rank>();
 	
-	public void initialize(Initialize Initialize) {
-		Initialize.initialize();
+	public void initialize(Initialize initialize) {
+		initialize.initialize();
 	}
 
 	int getMatchCountsOfPiece(Color color, Type type) {
