@@ -13,6 +13,10 @@ public class ChessGame {
 		this.ranks = board.getRanks();
 	}
 	
+	public ChessGame(UpperBoard upperBoard) {
+		this.ranks = upperBoard.getRanks();
+	}
+
 	public Piece findPiece(String spot) {
 		Position position = new Position(spot);
 		Rank rank = ranks.get(position.getY());
