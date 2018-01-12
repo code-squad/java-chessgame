@@ -2,6 +2,9 @@ package chess;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -15,27 +18,38 @@ import pieces.Queen;
 import pieces.Rook;
 
 public class BoardTest {
-	private UpperBoard upperBoard;
+	private Board board;
 
 	@Before
 	public void setUp() {
-		upperBoard = new UpperBoard();
+		board = new Board();
 	}
 
 	@Test
 	public void getMatchCountOfPieceTest() throws Exception {
-		upperBoard.initialize(new Board());
-		assertEquals(8, upperBoard.getMatchCountsOfPiece(Color.WHITE, Type.PAWN));
-		assertEquals(2, upperBoard.getMatchCountsOfPiece(Color.BLACK, Type.BISHOP));
-		assertEquals(2, upperBoard.getMatchCountsOfPiece(Color.WHITE, Type.KNIGHT));
-		assertEquals(2, upperBoard.getMatchCountsOfPiece(Color.BLACK, Type.ROOK));
-		assertEquals(1, upperBoard.getMatchCountsOfPiece(Color.WHITE, Type.KING));
-		assertEquals(32, upperBoard.getMatchCountsOfPiece(Color.NO_COLOR, Type.NO_PIECE));
+		board.initialize(new UpperBoard());
+		assertEquals(8, board.getMatchCountsOfPiece(Color.WHITE, Type.PAWN));
+		assertEquals(2, board.getMatchCountsOfPiece(Color.BLACK, Type.BISHOP));
+		assertEquals(2, board.getMatchCountsOfPiece(Color.WHITE, Type.KNIGHT));
+		assertEquals(2, board.getMatchCountsOfPiece(Color.BLACK, Type.ROOK));
+		assertEquals(1, board.getMatchCountsOfPiece(Color.WHITE, Type.KING));
+		assertEquals(32, board.getMatchCountsOfPiece(Color.NO_COLOR, Type.NO_PIECE));
 	}
 
 	@Test
 	public void calculcatePoint() throws Exception {
-		upperBoard.initialize(new BoardForTest());
+		Initialize init = new Initialize() {
+			@Override
+			public List<Rank> initialize() {
+				List<Rank> ranks = new ArrayList<>();
+				for (int i = 0; i < 8; i++) {
+					ranks.add(Rank.initializeBlank(8 - i));
+				}
+				return ranks;
+			}
+		};
+		Board board = new Board();
+		board.initialize(init);
 
 		addPiece("b6", Pawn.createBlack(null));
 		addPiece("e6", Queen.createBlack(null));
@@ -47,12 +61,12 @@ public class BoardTest {
 		addPiece("e1", Rook.createWhite(null));
 		addPiece("f1", King.createWhite(null));
 
-		assertEquals(15.0, upperBoard.calculcatePoint(Color.BLACK), 0.01);
-		assertEquals(7.0, upperBoard.calculcatePoint(Color.WHITE), 0.01);
+		assertEquals(15.0, board.calculcatePoint(Color.BLACK), 0.01);
+		assertEquals(7.0, board.calculcatePoint(Color.WHITE), 0.01);
 	}
 
 	private void addPiece(String position, Piece piece) {
-		ChessGame game = new ChessGame(upperBoard);
+		ChessGame game = new ChessGame(board);
 		game.move(new Position(position), piece);
 	}
 }

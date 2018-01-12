@@ -20,7 +20,7 @@ public class Main {
 			System.out.print("start or end ? : ");
 			String input = sc.nextLine();
 			if (input.equals("start")) {
-				board.initialize();
+				board.initialize(new UpperBoard());
 				log.info(chessView.showBoard());
 			} else if (input.startsWith("move")) {
 				String[] position = input.split(" ");

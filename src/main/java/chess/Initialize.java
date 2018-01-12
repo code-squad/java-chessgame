@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.List;
+
 public interface Initialize {
-	public void initialize();
+	public List<Rank> initialize();
 }

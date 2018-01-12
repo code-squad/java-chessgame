@@ -12,10 +12,6 @@ public class ChessGame {
 	ChessGame(Board board) {
 		this.ranks = board.getRanks();
 	}
-	
-	public ChessGame(UpperBoard upperBoard) {
-		this.ranks = upperBoard.getRanks();
-	}
 
 	public Piece findPiece(String spot) {
 		Position position = new Position(spot);
